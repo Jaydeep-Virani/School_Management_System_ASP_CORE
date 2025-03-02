@@ -1,0 +1,99 @@
+﻿@model List<School_Management_System_ASP_CORE.Models.FacultyModel>
+@{
+    ViewData["Title"] = "Faculty Management";
+}
+
+<div class="p-6 bg-gray-100 rounded shadow-md">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">All Faculty List</h1>
+    </div>
+
+    <!-- Updated Flexbox for Add Button (Left) & Search (Right) -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <a asp-action="AddFaculty" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">+ Add Faculty</a>
+        </div>
+        <div class="flex items-center space-x-2">
+            <input type="text" id="searchBox" placeholder="Search..." class="border border-gray-300 rounded-md px-4 py-2">
+            <button onclick="searchTable()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Search</button>
+        </div>
+    </div>
+
+    <table class="table-auto border border-gray-300 rounded w-full text-sm shadow-lg">
+        <thead>
+            <tr class="bg-blue-500 text-white">
+                <th class="px-4 py-2">Photo</th>
+                <th class="px-4 py-2">Faculty ID</th>
+                <th class="px-4 py-2">First Name</th>
+                <th class="px-4 py-2">Last Name</th>
+                <th class="px-4 py-2">Email</th>
+                <th class="px-4 py-2">Phone No.</th>
+                <th class="px-4 py-2">Emergency Phone</th>
+                <th class="px-4 py-2">Date of Birth</th>
+                <th class="px-4 py-2">Address</th>
+                <th class="px-4 py-2">Department</th>
+                <th class="px-4 py-2">Gender</th>
+                <th class="px-4 py-2">Joining Date</th>
+                <th class="px-4 py-2">Action</th>
+            </tr>
+        </thead>
+        <tbody id="facultyTable">
+            @foreach (var faculty in Model)
+            {
+                <tr class="border-b text-gray-700">
+                    <td class="px-4 py-2">
+                        @if (!string.IsNullOrEmpty(faculty.ImagePath))
+                        {
+                            <img src="@Url.Content(faculty.ImagePath)" alt="Faculty Photo" class="w-12 h-12 rounded-full border shadow-md">
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">No Image</span>
+                        }
+                    </td>
+                    <td class="px-4 py-2">@faculty.FacultyID</td>
+                    <td class="px-4 py-2">@faculty.FirstName</td>
+                    <td class="px-4 py-2">@faculty.LastName</td>
+                    <td class="px-4 py-2">@faculty.Email</td>
+                    <td class="px-4 py-2">@faculty.PhoneNumber</td>
+                    <td class="px-4 py-2">@faculty.EmergencyPhoneNumber</td>
+                    <td class="px-4 py-2">@(faculty.DateOfBirth?.ToString("dd-MM-yyyy") ?? "N/A")</td>
+                    <td class="px-4 py-2">@faculty.Address</td>
+                    <td class="px-4 py-2">@faculty.Department</td>
+                    <td class="px-4 py-2">@faculty.Gender</td>
+                    <td class="px-4 py-2">@(faculty.JoiningDate?.ToString("dd-MM-yyyy") ?? "N/A")</td>
+                    <td class="px-4 py-2 text-center">
+                        <a asp-action="Edit" asp-route-id="@faculty.FacultyID" class="text-blue-600 hover:text-blue-800 mx-2"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@faculty.FacultyID" class="text-red-600 hover:text-red-800 mx-2"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, j, txtValue;
+        input = document.getElementById("searchBox");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("facultyTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            let rowVisible = false;
+            td = tr[i].getElementsByTagName("td");
+
+            for (j = 0; j < td.length; j++) { // Loop through all columns
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        rowVisible = true;
+                        break; // No need to check other columns if one matches
+                    }
+                }
+            }
+            tr[i].style.display = rowVisible ? "" : "none";
+        }
+    }
+</script>

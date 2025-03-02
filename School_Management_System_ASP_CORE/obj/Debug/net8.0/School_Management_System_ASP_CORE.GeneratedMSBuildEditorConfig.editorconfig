@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = School_Management_System_ASP_CORE
 build_property.RootNamespace = School_Management_System_ASP_CORE
@@ -17,6 +25,50 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = E:\laragon\www\ASP.NET\School_Management_System_ASP_CORE\School_Management_System_ASP_CORE
 build_property._RazorSourceGeneratorDebug = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/AddFaculty.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkRmFjdWx0eS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/AddHoliday.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkSG9saWRheS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/AddStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkU3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ClassView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2xhc3NWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageFaculty.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlRmFjdWx0eS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageHolidays.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlSG9saWRheXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlU3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/SubjectView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3ViamVjdFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
 
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
@@ -32,6 +84,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Student/AddStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxBZGRTdHVkZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/_ViewImports.cshtml]

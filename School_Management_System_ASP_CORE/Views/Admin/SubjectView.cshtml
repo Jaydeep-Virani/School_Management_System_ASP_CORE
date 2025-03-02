@@ -1,0 +1,50 @@
+﻿@model ManageSubjectModel
+@{
+    ViewData["Title"] = "Subject";
+}
+<div class="container mx-auto p-4 flex space-x-4">
+
+    <!-- Add Subject Section -->
+    <div class="w-1/2 p-4 bg-white rounded-lg shadow">
+        <h2 class="text-xl font-bold mb-4">Add Subject</h2>
+
+        <form asp-action="AddSubject" method="post">
+            <div class="mb-4">
+                <label asp-for="SubjectName" class="block text-sm font-medium text-gray-700">Subject Name</label>
+                <input asp-for="SubjectName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="SubjectName" class="text-red-500 text-sm"></span>
+            </div>
+
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add Subject</button>
+        </form>
+    </div>
+
+    <!-- Subject List Section -->
+    <div class="w-1/2 p-4 bg-white rounded-lg shadow">
+        <h2 class="text-xl font-bold mb-4">Subject List</h2>
+        <table class="w-full border">
+            <thead>
+                <tr class="bg-blue-500 text-white">
+                    <th class="p-2 border">Sr No.</th>
+                    <th class="p-2 border">Subject Name</th>
+                    <th class="p-2 border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var subjectItem in Model.Subjects)
+                {
+                    <tr class="border-t">
+                        <td class="p-2 text-center">@subjectItem.SubjectID</td>
+                        <td class="p-2 text-center">@subjectItem.SubjectName</td>
+                        <td class="p-2 text-center">
+                            <a asp-action="SubjectDelete" asp-route-id="@subjectItem.SubjectID" class="text-red-500 hover:text-red-700">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

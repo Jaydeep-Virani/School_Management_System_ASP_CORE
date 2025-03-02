@@ -1,0 +1,77 @@
+﻿<div class="p-6 bg-gray-100 rounded shadow-md">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">All Students List</h1>
+    </div>
+
+    <!-- Updated Flexbox for Add Button (Left) & Search (Right) -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">+ Add Student</a>
+        </div>
+        <div class="flex items-center space-x-2">
+            <input type="text" id="searchBox" placeholder="Search..."
+                   class="border border-gray-300 rounded-md px-4 py-2">
+            <button onclick="searchTable()"
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Search
+            </button>
+        </div>
+    </div>
+
+    <table class="table-auto border border-gray-300 rounded w-full text-sm shadow-lg">
+        <thead>
+            <tr class="bg-blue-500 text-white">
+                <th class="px-4 py-2">Roll No.</th>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Education</th>
+                <th class="px-4 py-2">Mobile</th>
+                <th class="px-4 py-2">Email</th>
+                <th class="px-4 py-2">Admission Date</th>
+                <th class="px-4 py-2">Action</th>
+            </tr>
+        </thead>
+        <tbody id="studentTable">
+            @foreach (var student in Model)
+            {
+                <tr class="border-b text-gray-700">
+                    <td class="px-4 py-2">@student.RollNo</td>
+                    <td class="px-4 py-2">@student.Name</td>
+                    <td class="px-4 py-2">@student.Education</td>
+                    <td class="px-4 py-2">@student.Mobile</td>
+                    <td class="px-4 py-2">@student.Email</td>
+                    <td class="px-4 py-2">@student.AdmissionDate</td>
+                    <td class="px-4 py-2 text-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 mx-2"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="text-red-600 hover:text-red-800 mx-2"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, j, txtValue;
+        input = document.getElementById("searchBox");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("studentTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            let rowVisible = false;
+            td = tr[i].getElementsByTagName("td");
+
+            for (j = 0; j < td.length; j++) { // Loop through all columns
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        rowVisible = true;
+                        break; // No need to check other columns if one matches
+                    }
+                }
+            }
+            tr[i].style.display = rowVisible ? "" : "none";
+        }
+    }
+</script>

@@ -1,0 +1,86 @@
+﻿@model School_Management_System_ASP_CORE.Models.AdminModel
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+
+<form asp-action="AddStudent" method="post" enctype="multipart/form-data" class="bg-white p-8 shadow-lg rounded-lg">
+    <h1 class="text-2xl font-bold text-center mb-6">Add New Student</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+        <div>
+            <label class="block mb-3 text-sm font-medium">First Name</label>
+            <input asp-for="FirstName" class="w-full border p-2 focus:outline-sky-600 rounded" />
+            <span asp-validation-for="FirstName" class="text-red-500 text-xs"></span>
+        </div>
+        <div>
+            <label class="block mb-3 text-sm font-medium">Last Name</label>
+            <input asp-for="LastName" class="w-full border p-2 focus:outline-sky-600 rounded" />
+            <span asp-validation-for="LastName" class="text-red-500 text-xs"></span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+        <div>
+            <label class="block mb-3 text-sm font-medium">Email</label>
+            <input asp-for="Email" class="w-full border p-2 focus:outline-sky-600 rounded" />
+            <span asp-validation-for="Email" class="text-red-500 text-xs"></span>
+        </div>
+        <div>
+            <label class="block mb-3 text-sm font-medium">Phone No.</label>
+            <input asp-for="PhoneNumber" class="w-full border p-2 focus:outline-sky-600 rounded" />
+            <span asp-validation-for="PhoneNumber" class="text-red-500 text-xs"></span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+        <div>
+            <label class="block mb-3 text-sm font-medium">Emergency Phone No.</label>
+            <input asp-for="EmergencyPhoneNumber" class="w-full border p-2 focus:outline-sky-600 rounded" />
+            <span asp-validation-for="EmergencyPhoneNumber" class="text-red-500 text-xs"></span>
+        </div>
+        <div>
+            <label class="block mb-3 text-sm font-medium">Date Of Birth</label>
+            <input asp-for="DateOfBirth" type="date" class="w-full border p-2 focus:outline-sky-600 rounded" />
+            <span asp-validation-for="DateOfBirth" class="text-red-500 text-xs"></span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+        <div>
+            <label class="block mb-3 text-sm font-medium">Address</label>
+            <textarea asp-for="Address" class="w-full border p-2 focus:outline-sky-600 rounded"></textarea>
+            <span asp-validation-for="Address" class="text-red-500 text-xs"></span>
+        </div>
+        <div>
+            <label class="block mb-3 text-sm font-medium">Class</label>
+            <select asp-for="Class" class="w-full border p-2 focus:outline-sky-600 rounded">
+                <option value="">Choose...</option>
+                <option value="1">Class 1</option>
+                <option value="2">Class 2</option>
+            </select>
+            <span asp-validation-for="Class" class="text-red-500 text-xs"></span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+        <div>
+            <label class="block mb-3 text-sm font-medium">Gender</label>
+            <select asp-for="Gender" class="w-full border p-2 focus:outline-sky-600 rounded">
+                <option value="">Choose...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-red-500 text-xs"></span>
+        </div>
+        <div>
+            <label class="block mb-3 text-sm font-medium">Student Image</label>
+            <input asp-for="StudentImage" type="file" class="w-full border p-2 focus:outline-sky-600 rounded" />
+            <span asp-validation-for="StudentImage" class="text-red-500 text-xs"></span>
+        </div>
+    </div>
+
+    <div class="text-left mt-6">
+        <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Add Student</button>
+    </div>
+</form>

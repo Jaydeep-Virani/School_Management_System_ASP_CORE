@@ -18,6 +18,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Holiday}/{action=ManageHolidays}/{id?}");
+});
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

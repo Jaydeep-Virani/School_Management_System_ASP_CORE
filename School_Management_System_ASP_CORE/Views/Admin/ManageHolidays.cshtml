@@ -1,0 +1,96 @@
+﻿@model List<School_Management_System_ASP_CORE.Models.HolidayModel>
+@{
+    ViewData["Title"] = "Holiday Management";
+    int selectedMonth = ViewBag.Month;
+}
+
+<div class="container mx-auto p-4 bg-white rounded-lg shadow">
+    <a asp-action="AddHoliday" class="mb-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">+ Add Holiday</a>
+
+    <div class="flex">
+        <!-- Month List -->
+        <div class="w-1/4 p-4 border-r">
+            <h2 class="text-lg font-bold mb-2">Months</h2>
+            <ul>
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <li class="p-2 bg-gray-100 rounded mb-2 cursor-pointer hover:bg-gray-200"
+                        onclick="loadHolidays(@i)"
+                        style="@(selectedMonth == i ? "font-weight: bold;" : "")">
+                        @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Holiday List -->
+        <div class="w-3/4 p-4">
+            <h2 class="text-lg font-bold mb-2 flex items-center">
+                <span class="mr-2">&#128197;</span>
+                <span id="monthName">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(selectedMonth)</span>
+            </h2>
+            <table class="w-full border text-center">
+                <thead>
+                    <tr class="bg-blue-500 text-white">
+                        <th class="p-2">Sr No.</th>
+                        <th class="p-2">Holiday Name</th>
+                        <th class="p-2">Date</th>
+                        <th class="p-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="holidayTable">
+                    @foreach (var holiday in Model)
+                    {
+                        <tr class="border-t">
+                            <td class="p-2">@holiday.Id</td>
+                            <td class="p-2">@holiday.Name</td>
+                            <td class="p-2">@holiday.Date.ToString("dd-MM-yyyy")</td>
+                            <td class="p-2">
+                                <a asp-action="EditHoliday" asp-route-id="@holiday.Id" class="text-blue-500 hover:text-blue-700 mr-2">✏️ Edit</a>
+                                <a asp-action="DeleteHoliday" asp-route-id="@holiday.Id" class="text-red-500 hover:text-red-700">🗑 Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadHolidays(month) {
+        fetch(`/Holiday/GetHolidaysByMonth?month=${month}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById("monthName").innerText = new Date(2025, month - 1, 1).toLocaleString('en-us', { month: 'long' });
+
+                let holidayTable = document.getElementById("holidayTable");
+                holidayTable.innerHTML = "";
+
+                if (data.length === 0) {
+                    holidayTable.innerHTML = `<tr><td colspan="4" class="p-2 text-gray-500">No holidays found for this month</td></tr>`;
+                } else {
+                    data.forEach((holiday, index) => {
+                        holidayTable.innerHTML += `
+                                <tr class="border-t">
+                                    <td class="p-2">${index + 1}</td>
+                                    <td class="p-2">${holiday.name}</td>
+                                    <td class="p-2">${new Date(holiday.date).toLocaleDateString()}</td>
+                                    <td class="p-2">
+                                        <a href="/Holiday/EditHoliday/${holiday.id}" class="text-blue-500 hover:text-blue-700 mr-2">✏️ Edit</a>
+                                        <a href="/Holiday/DeleteHoliday/${holiday.id}" class="text-red-500 hover:text-red-700">🗑 Delete</a>
+                                    </td>
+                                </tr>
+                            `;
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching holidays:', error));
+    }
+</script>
+

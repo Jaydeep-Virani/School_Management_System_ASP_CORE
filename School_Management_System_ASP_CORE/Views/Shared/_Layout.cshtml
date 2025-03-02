@@ -3,47 +3,265 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - School_Management_System_ASP_CORE</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/School_Management_System_ASP_CORE.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            transition: width 0.3s ease-in-out;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .main-content {
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .closed-sidebar .sidebar {
+            width: 4rem;
+        }
+
+        .closed-sidebar .sidebar ul li span {
+            display: none;
+        }
+
+        .closed-sidebar .sidebar ul li .submenu-icon {
+            display: none;
+        }
+
+        .sidebar ul li ul {
+            display: none;
+            position: absolute;
+            left: 4rem;
+            top: 0;
+            width: 12rem;
+            background: #fff;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar ul li ul.show {
+            display: block;
+        }
+
+        .sidebar ul li:hover ul {
+            display: block;
+        }
+
+        .closed-sidebar ul li ul {
+            left: 2rem;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">School_Management_System_ASP_CORE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="w-full bg-blue-600 text-white p-4">
+            <div class="flex justify-between items-center max-w-full">
+                <h1 class="text-lg font-bold"> <img src="Image/Logo/IMG_1599.PNG" alt="Profile Picture" class="w-70 h-10 pl-3" /></h1>
+                <div class="flex items-center space-x-4">
+                    <img src="Image/profile.png" alt="Profile Picture" class="rounded-full w-10 h-10" />
+                    <div class="relative">
+                        <button id="dropdownButton" class="flex items-center space-x-2">
+                            <span>Jaydeep Virani</span>
+                            <i class="fas fa-caret-down"></i>
+                        </button>
+                        <div id="dropdownMenu" class="absolute right-0 mt-2 bg-white text-black rounded shadow-lg hidden w-40">
+                            <ul class="bg-white shadow-lg rounded-lg">
+                                <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2 flex items-center">
+                                    <i class="fas fa-user-circle mr-2"></i>
+                                    <a href="#">Profile</a>
+                                </li>
+                                <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2 flex items-center">
+                                    <i class="fas fa-key mr-2"></i>
+                                    <a asp-controller="Admin" asp-action="ChangePassword">Change Password</a>
+                                </li>
+                                <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2 flex items-center">
+                                    <i class="fas fa-cog mr-2"></i>
+                                    <a href="#">Settings</a>
+                                </li>
+
+                                <!-- Gray Divider Line -->
+                                <hr class="border-t border-gray-300 my-2">
+
+                                <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2 flex items-center text-red-600">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    <a href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <div class="content-wrapper">
+        <div id="sidebar" class="sidebar w-64 bg-white text-black flex flex-col">
+            <div class="p-4">
+                <button id="toggleButton" class="text-black">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="flex-1">
+                <!-- Dashboard -->
+                <a href="Dashboard.aspx">
+                <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-105 transition">
+                    <i class="fas fa-tachometer-alt text-blue-500"></i>
+                    <a asp-controller="Admin" asp-action="Dashboard">
+                    <span>Dashboard</span>
+                    </a>
+                </li>
+                </a>
+                <!-- Student -->
+                <li class="p-4 flex flex-col font-bold hover:font-bold hover:scale-105 transition relative">
+                    <div class="flex items-center justify-between space-x-4 cursor-pointer" id="studentMenu">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-user-graduate text-blue-500"></i> <!-- Student Icon -->
+                            <span>Student</span>
+                        </div>
+                        <i class="fas fa-chevron-down submenu-icon"></i>
+                    </div>
+                    <ul class="hidden ml-8 mt-10 space-y-2 bg-gray-50 text-gray-700 rounded shadow-md py-2" id="studentSubMenu">
+                        <a asp-controller="Admin" asp-action="AddStudent">
+                        <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2">Add Student</li></a>
+                        <a asp-controller="Admin" asp-action="ManageStudent">
+                        <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2">Manage Student</li></a>
+                    </ul>
+                </li>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - School_Management_System_ASP_CORE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <!-- Class -->
+                <a asp-controller="Admin" asp-action="ClassView">
+                <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-105 transition">
+                    <i class="fas fa-book text-yellow-500"></i>
+                    <a asp-controller="Admin" asp-action="ClassView">
+                        <span>Class</span>
+                    </a>
+                </li>
+                </a>
+
+                <!-- Faculty -->
+                <li class="p-4 flex flex-col font-bold hover:font-bold hover:scale-105 transition relative">
+                    <div class="flex items-center justify-between space-x-4 cursor-pointer" id="facultyMenu">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-chalkboard-teacher text-blue-500"></i>
+                            <span>Faculty</span>
+                        </div>
+                        <i class="fas fa-chevron-down submenu-icon"></i>
+                    </div>
+                    <ul class="hidden ml-8 mt-2 space-y-2 bg-gray-50 text-gray-700 rounded shadow-md py-2" id="facultySubMenu">
+                        <a asp-controller="Admin" asp-action="AddFaculty">
+                        <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2">Add Faculty</li></a>
+                        <a asp-controller="Admin" asp-action="ManageFaculty">
+                        <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2">Manage Faculty</li></a>
+                    </ul>
+                </li>
+
+                <!-- Subject -->
+                <a asp-controller="Admin" asp-action="SubjectView">
+                <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-105 transition">
+                    <i class="fas fa-book-open text-blue-500"></i>
+                     <a asp-controller="Admin" asp-action="SubjectView">
+                    <span>Subject</span>
+                    </a>
+                </li>
+                </a>
+                <!-- Holiday -->
+                <li class="p-4 flex flex-col font-bold hover:font-bold hover:scale-105 transition relative">
+                    <div class="flex items-center justify-between space-x-4 cursor-pointer" id="holidayMenu">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-calendar-alt text-blue-500"></i>
+                            <span>Holiday</span>
+                        </div>
+                        <i class="fas fa-chevron-down submenu-icon"></i>
+                    </div>
+                    <ul class="hidden ml-8 mt-2 space-y-2 bg-gray-50 text-gray-700 rounded shadow-md py-2" id="holidaySubMenu">
+                        <a asp-controller="Admin" asp-action="AddHoliday">
+                        <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2">Add Holiday</li></a>
+                        <a asp-controller="Admin" asp-action="ManageHolidays">
+                        <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2">Manage Holiday</li></a>
+                    </ul>
+                </li>
+                <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-105 transition">
+                    <i class="fas fa-user text-purple-500"></i>
+                    <a asp-controller="Admin" asp-action="Profile">
+                    <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="mt-auto">
+                <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-104 transition">
+                    <i class="fas fa-sign-out-alt text-red-500"></i>
+                    <span>Logout</span>
+                </li>
+            </ul>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <div id="mainContent" class="main-content flex-1 p-8 bg-gray-100">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    <script>
+        document.getElementById('toggleButton').addEventListener('click', () => {
+            document.body.classList.toggle('closed-sidebar');
+        });
+
+        document.getElementById('dropdownButton').addEventListener('click', () => {
+            document.getElementById('dropdownMenu').classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!document.getElementById('dropdownButton').contains(event.target) &&
+                !document.getElementById('dropdownMenu').contains(event.target)) {
+                document.getElementById('dropdownMenu').classList.add('hidden');
+            }
+        });
+
+        document.getElementById("studentMenu").addEventListener("click", (e) => {
+            e.stopPropagation();
+            document.getElementById("studentSubMenu").classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", () => {
+            if (!document.getElementById("studentSubMenu").classList.contains("hidden")) {
+                document.getElementById("studentSubMenu").classList.add("hidden");
+            }
+        });
+
+        document.getElementById("facultyMenu").addEventListener("click", (e) => {
+            e.stopPropagation();
+            document.getElementById("facultySubMenu").classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", () => {
+            if (!document.getElementById("facultySubMenu").classList.contains("hidden")) {
+                document.getElementById("facultySubMenu").classList.add("hidden");
+            }
+        });
+
+        document.getElementById("holidayMenu").addEventListener("click", (e) => {
+            e.stopPropagation();
+            document.getElementById("holidaySubMenu").classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", () => {
+            if (!document.getElementById("holidaySubMenu").classList.contains("hidden")) {
+                document.getElementById("holidaySubMenu").classList.add("hidden");
+            }
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
