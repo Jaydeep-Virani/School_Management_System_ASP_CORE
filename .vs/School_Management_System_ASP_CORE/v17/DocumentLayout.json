@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Home\\Index.cshtml",
               "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAOAAAA",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAADUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-02T07:24:12.111Z",
               "EditorCaption": ""
@@ -75,8 +75,7 @@
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\Dashboard.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-02T07:18:50.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-02T07:18:50.619Z"
             },
             {
               "$type": "Document",
@@ -88,8 +87,7 @@
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AQIAAMMAAAAAAAAAAAAAAM0AAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-12T07:28:33.754Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-12T07:28:33.754Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\ChangePassword.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-02T06:52:22.921Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-02T06:52:22.921Z"
             },
             {
               "$type": "Document",
@@ -114,8 +111,7 @@
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Models\\ChangePasswordModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-02T06:50:42.488Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-02T06:50:42.488Z"
             },
             {
               "$type": "Document",
@@ -127,8 +123,7 @@
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\Profile.cshtml",
               "ViewState": "AQIAAFoAAAAAAAAAAAAAAG4AAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-02T05:35:25.405Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-02T05:35:25.405Z"
             },
             {
               "$type": "Document",
@@ -140,8 +135,7 @@
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Models\\ProfileModel.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAcwCEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-02T05:31:13.458Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-02T05:31:13.458Z"
             },
             {
               "$type": "Document",
@@ -153,8 +147,7 @@
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T15:47:13.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-20T15:47:13.877Z"
             }
           ]
         }
