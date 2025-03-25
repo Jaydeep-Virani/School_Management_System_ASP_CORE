@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using School_Management_System_ASP_CORE.Data;
 using School_Management_System_ASP_CORE.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
@@ -123,63 +124,126 @@ namespace School_Management_System_ASP_CORE.Controllers
             [DataType(DataType.Date)]
             public DateTime? AdmissionDate { get; set; } // Changed from string to DateTime?
         }
+        private readonly ApplicationDbContext _context;
 
-        private static List<ManageClassModel> classList = new List<ManageClassModel>();
+        public AdminController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult ClassView()
         {
-            var model = new ManageClassModel { Classes = classList };
+            var model = _context.Classes.ToList();
             return View(model);
         }
+
+        // ✅ Add a new class
         [HttpPost]
         public IActionResult AddClass(ManageClassModel model)
         {
             if (!ModelState.IsValid)
             {
-                model.Classes = classList; // Preserve list data
-                return View("ClassView", model);
+                return View("ClassView", _context.Classes.ToList());
             }
 
-            // Add new class
-            classList.Add(new ManageClassModel { ClassID = classList.Count + 1, ClassName = model.ClassName });
-
+            _context.Classes.Add(model);
+            _context.SaveChanges();
             return RedirectToAction("ClassView");
         }
-        public IActionResult Delete(int id)
+
+        [HttpGet]
+        public IActionResult Class_Edit(int id)
         {
-            classList.RemoveAll(c => c.ClassID == id);
+            var classItem = _context.Classes.Find(id);
+            if (classItem == null) return NotFound();
+
+            return View(classItem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Class_Edit(ManageClassModel model)
+        {
+            if (!ModelState.IsValid) return View("Class_Edit", model);
+
+            _context.Classes.Update(model);
+            _context.SaveChanges();
+
+            return RedirectToAction("ClassView"); 
+        }
+
+        // ✅ Delete class
+        public IActionResult Class_Delete(int id)
+        {
+            var classItem = _context.Classes.Find(id);
+            if (classItem != null)
+            {
+                _context.Classes.Remove(classItem);
+                _context.SaveChanges();
+            }
             return RedirectToAction("ClassView");
         }
 
-        private static List<ManageSubjectModel> subjectList = new List<ManageSubjectModel>();
 
         public IActionResult SubjectView()
         {
-            var model = new ManageSubjectModel { Subjects = subjectList };
-            return View(model);
+            var subjects = _context.Subject_Master.ToList();
+            return View(subjects);
         }
+
+        // ✅ Add a new subject (GET)
+        public IActionResult AddSubject()
+        {
+            return View();
+        }
+
+        // ✅ Add a new subject (POST)
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddSubject(ManageSubjectModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                model.Subjects = subjectList; // Preserve list data
-                return View("SubjectView", model);
-            }
+            if (!ModelState.IsValid) return View(model);
 
-            // Add new class
-            subjectList.Add(new ManageSubjectModel { SubjectID = classList.Count + 1, SubjectName = model.SubjectName });
-
+            _context.Subject_Master.Add(model);
+            _context.SaveChanges();
             return RedirectToAction("SubjectView");
         }
-        public IActionResult SubjectDelete(int id)
+
+        // ✅ Edit subject (GET)
+        [HttpGet]
+        public IActionResult Edit_Subject(int id)
         {
-            subjectList.RemoveAll(c => c.SubjectID == id);
+            var subject = _context.Subject_Master.FirstOrDefault(s => s.subject_id == id);
+            if (subject == null) return NotFound();
+
+            return View(subject);
+        }
+
+        // ✅ Edit subject (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit_Subject(ManageSubjectModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            _context.Subject_Master.Update(model);
+            _context.SaveChanges();
+            return RedirectToAction("SubjectView");
+        }
+
+        // ✅ Delete subject
+        public IActionResult Delete_Subject(int id)
+        {
+            var subject = _context.Subject_Master.FirstOrDefault(s => s.subject_id == id);
+            if (subject != null)
+            {
+                _context.Subject_Master.Remove(subject);
+                _context.SaveChanges();
+            }
             return RedirectToAction("SubjectView");
         }
 
 
-        
         public IActionResult AddHoliday()
         {
             return View();
@@ -265,5 +329,45 @@ namespace School_Management_System_ASP_CORE.Controllers
             return RedirectToAction("ChangePassword");
         }
 
+
+        private static List<LeaveModel> leaveData = new List<LeaveModel>();
+
+        public ActionResult ManageLeave()
+        {
+            return View(leaveData);
+        }
+
+        public ActionResult AddLeave()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddLeave(LeaveModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            model.Id = leaveData.Count + 1;
+            model.Status = false; // Default new leave requests to "Pending"
+            leaveData.Add(model);
+
+            TempData["SuccessMessage"] = "Leave application submitted successfully!";
+            return RedirectToAction("ManageLeave");
+        }
+
+        [HttpPost]
+        public JsonResult UpdateLeaveStatus(int id, bool status)
+        {
+            var leave = leaveData.FirstOrDefault(l => l.Id == id);
+            if (leave != null)
+            {
+                leave.Status = status;
+                return Json(new { success = true, updatedStatus = status });
+            }
+            return Json(new { success = false });
+        }
     }
 }

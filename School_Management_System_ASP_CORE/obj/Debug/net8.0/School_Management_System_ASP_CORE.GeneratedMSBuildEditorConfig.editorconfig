@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkSG9saWRheS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/AddLeave.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTGVhdmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/AddStudent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkU3R1ZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -46,8 +50,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2xhc3NWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/Class_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2xhc3NfRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/Edit_Subject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdF9TdWJqZWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageFaculty.cshtml]
@@ -56,6 +68,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageHolidays.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlSG9saWRheXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageLeave.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlTGVhdmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageStudent.cshtml]

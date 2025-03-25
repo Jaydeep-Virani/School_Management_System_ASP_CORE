@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "ManageLeave";
+}
+
+<div class="p-6 bg-gray-100 min-h-screen">
+    <div class="mb-4 flex justify-between items-center">
+        <h2 class="text-2xl font-semibold text-gray-800">All Leave Requests</h2>
+    </div>
+
+    <table class="min-w-full bg-white shadow-md rounded-lg">
+        <thead class="bg-blue-600 text-white">
+            <tr>
+                <th class="px-4 py-2">#</th>
+                <th class="px-4 py-2">Leave Reason</th>
+                <th class="px-4 py-2">Leave Days</th>
+                <th class="px-4 py-2">Leave Date</th>
+                <th class="px-4 py-2">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var leave in Model)
+            {
+                <tr>
+                    <td class="border px-4 py-2">@(Model.IndexOf(leave) + 1)</td>
+                    <td class="border px-4 py-2">@leave.LeaveReason</td>
+                    <td class="border px-4 py-2">@leave.LeaveDay</td>
+                    <td class="border px-4 py-2">@leave.LeaveDate.ToString("yyyy-MM-dd")</td>
+                    <td class="border px-4 py-2">
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" @(leave.Status ? "checked" : "") onchange="updateStatus(@leave.Id, this.checked)">
+                            <div class="relative w-11 h-6 rounded-full peer bg-gray-700 @(leave.Status ? "bg-green-600" : "bg-red-600")">
+                                <div class="absolute top-0.5 left-1 w-5 h-5 bg-white rounded-full transition-all transform @(leave.Status ? "translate-x-5" : "")"></div>
+                            </div>
+                            <span class="ml-2 text-sm font-medium @(leave.Status ? "text-green-600" : "text-red-600")">
+                                @(leave.Status ? "Approved" : "Pending")
+                            </span>
+                        </label>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function updateStatus(id, status) {
+        $.ajax({
+            url: '@Url.Action("UpdateLeaveStatus", "Admin")',
+            type: 'POST',
+            data: { id: id, status: status },
+            success: function (response) {
+                if (response.success) {
+                    console.log("Status updated successfully!");
+                } else {
+                    alert("Failed to update status.");
+                }
+            },
+            error: function () {
+                alert("Error while updating status.");
+            }
+        });
+    }
+</script>

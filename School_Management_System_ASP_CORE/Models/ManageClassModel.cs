@@ -1,15 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System_ASP_CORE.Models
 {
+    [Table("master_class")] // ✅ Ensure table name matches database
     public class ManageClassModel
     {
-        public int ClassID { get; set; }
-        public List<ManageClassModel> Classes { get; set; } = new List<ManageClassModel>();
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int class_id { get; set; } // ✅ Match column name with DB
 
         [Required(ErrorMessage = "Class Name is required!")]
-        public string ClassName { get; set; }
+        public string class_name { get; set; } // ✅ Match column name with DB
     }
-
 }
-

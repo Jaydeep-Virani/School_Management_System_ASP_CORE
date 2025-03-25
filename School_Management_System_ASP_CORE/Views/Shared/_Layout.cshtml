@@ -193,6 +193,25 @@
                         <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2">Manage Holiday</li></a>
                     </ul>
                 </li>
+
+                <a asp-controller="Admin" asp-action="AddLeave">
+                <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-105 transition">
+                    <i class="fas fa-book-open text-blue-500"></i>
+                    <a asp-controller="Admin" asp-action="AddLeave">
+                        <span>Add Leave</span>
+                    </a>
+                </li>
+                </a>
+
+                <a asp-controller="Admin" asp-action="ManageLeave">
+                <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-105 transition">
+                    <i class="fas fa-book-open text-blue-500"></i>
+                    <a asp-controller="Admin" asp-action="ManageLeave">
+                        <span>Manage Leave</span>
+                    </a>
+                </li>
+                </a>
+
                 <li class="p-4 flex items-center space-x-4 font-bold hover:font-bold hover:scale-105 transition">
                     <i class="fas fa-user text-purple-500"></i>
                     <a asp-controller="Admin" asp-action="Profile">

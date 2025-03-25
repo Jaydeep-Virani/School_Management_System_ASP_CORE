@@ -1,0 +1,30 @@
+﻿@model School_Management_System_ASP_CORE.Models.ManageSubjectModel
+
+@{
+    ViewData["Title"] = "Edit Subject";
+}
+
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Edit Subject</h2>
+
+    <form asp-action="Edit_Subject" method="post" class="space-y-4">
+        <input type="hidden" asp-for="subject_id" />
+
+        <!-- Subject Name -->
+        <div>
+            <label asp-for="subject_name" class="block text-sm font-medium text-gray-700">Subject Name</label>
+            <input asp-for="subject_name" class="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300" placeholder="Enter subject name" />
+            <span asp-validation-for="subject_name" class="text-red-500 text-sm"></span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-4">
+            <a asp-action="SubjectView" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition">Cancel</a>
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">Save</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

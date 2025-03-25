@@ -1,0 +1,37 @@
+﻿@model LeaveModel
+@{
+    ViewData["Title"] = "AddLeave";
+}
+<div class="mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Leave Application</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="bg-green-100 text-green-700 p-2 mb-4 rounded">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @using (Html.BeginForm("AddLeave", "Admin", FormMethod.Post, new { @id = "leaveForm" }))
+    {
+        <div>
+            <label class="block text-gray-700 font-medium pb-3">Please Enter Leave Reason</label>
+            @Html.TextAreaFor(m => m.LeaveReason, new { @class = "w-full p-2 border border-gray-300 rounded-md" })
+            @Html.ValidationMessageFor(m => m.LeaveReason, "", new { @class = "text-red-500 text-sm" })
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium pb-3">Please Enter Leave Days</label>
+            @Html.TextBoxFor(m => m.LeaveDay, new { @class = "w-full p-2 border border-gray-300 rounded-md" })
+            @Html.ValidationMessageFor(m => m.LeaveDay, "", new { @class = "text-red-500 text-sm" })
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium pb-3">Date Leave Applied On</label>
+            @Html.TextBoxFor(m => m.LeaveDate, new { type = "date", @class = "w-full p-2 border border-gray-300 rounded-md" })
+            @Html.ValidationMessageFor(m => m.LeaveDate, "", new { @class = "text-red-500 text-sm" })
+        </div>
+
+        <button type="submit" class="w-50 mt-5 p-5 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">Submit</button>
+    }
+</div>
