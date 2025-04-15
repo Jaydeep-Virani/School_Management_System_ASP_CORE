@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using School_Management_System_ASP_CORE.Data;
 using School_Management_System_ASP_CORE.Models;
 
 var builder = WebApplication.CreateBuilder(args);

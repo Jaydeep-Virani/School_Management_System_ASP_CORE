@@ -30,10 +30,13 @@
                 </tr>
             </thead>
             <tbody>
+                @{
+                    var id = 1;
+                }
                 @foreach (var subject in Model)
                 {
                     <tr class="border-t">
-                        <td class="p-2 text-center">@subject.subject_id</td>
+                        <td class="p-2 text-center">@id</td>
                         <td class="p-2 text-center">@subject.subject_name</td>
                         <td class="p-2 text-center flex justify-center space-x-4">
                             <a asp-action="Edit_Subject" asp-route-id="@subject.subject_id" class="text-blue-500 hover:text-blue-700">
@@ -44,6 +47,7 @@
                             </a>
                         </td>
                     </tr>
+                    id++;
                 }
             </tbody>
         </table>

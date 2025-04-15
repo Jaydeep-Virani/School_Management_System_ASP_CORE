@@ -6,7 +6,7 @@ namespace School_Management_System_ASP_CORE.Models
 {
     public class FacultyModel
     {
-        public int FacultyID { get; set; }
+        public int fid { get; set; }
 
         [Required(ErrorMessage = "Please enter First name")]
         public string FirstName { get; set; }
@@ -25,22 +25,19 @@ namespace School_Management_System_ASP_CORE.Models
         [Required(ErrorMessage = "Emergency phone number is required")]
         public string EmergencyPhoneNumber { get; set; }
 
+        [Required(ErrorMessage = "Please enter Date of Birth")]
         [DataType(DataType.Date)]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Please enter Address")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Please select a Department")]
-        public string Department { get; set; }
-
         [Required(ErrorMessage = "Please select Gender")]
         public string Gender { get; set; }
 
-        public string ImagePath { get; set; } // ✅ Ensures ImagePath exists
+        public string ImagePath { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime? JoiningDate { get; set; }
+        [Required(ErrorMessage = "Please upload an image")]
+        public IFormFile ImageFile { get; set; }
     }
-
 }

@@ -1,10 +1,13 @@
-﻿@model School_Management_System_ASP_CORE.Models.AdminModel
-
+﻿@model School_Management_System_ASP_CORE.Models.StudentModel
+@if (TempData["Success"] != null)
+{
+    <div class="bg-green-200 text-green-800 p-3 mb-4 rounded">
+        @TempData["Success"]
+    </div>
+}
 @{
     ViewData["Title"] = "Add Student";
 }
-
-
 <form asp-action="AddStudent" method="post" enctype="multipart/form-data" class="bg-white p-8 shadow-lg rounded-lg">
     <h1 class="text-2xl font-bold text-center mb-6">Add New Student</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
@@ -54,10 +57,8 @@
         </div>
         <div>
             <label class="block mb-3 text-sm font-medium">Class</label>
-            <select asp-for="Class" class="w-full border p-2 focus:outline-sky-600 rounded">
+            <select asp-for="Class" class="w-full border p-2 focus:outline-sky-600 rounded" asp-items="ViewBag.ClassList">
                 <option value="">Choose...</option>
-                <option value="1">Class 1</option>
-                <option value="2">Class 2</option>
             </select>
             <span asp-validation-for="Class" class="text-red-500 text-xs"></span>
         </div>

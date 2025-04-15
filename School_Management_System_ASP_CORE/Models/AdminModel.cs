@@ -8,7 +8,7 @@ namespace School_Management_System_ASP_CORE.Models
 
         [Required(ErrorMessage = "Please enter First name")]
         [StringLength(03, ErrorMessage = "First Name cannot exceed 50 characters")]
-        public string FirstName { get; set; }
+        public string firstname { get; set; }
 
         [Required(ErrorMessage = "Please enter Last name")]
         [StringLength(50, ErrorMessage = "Last Name cannot exceed 50 characters")]
@@ -29,6 +29,7 @@ namespace School_Management_System_ASP_CORE.Models
         [Required(ErrorMessage = "Please enter Date Of Birth")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
+
         [Required(ErrorMessage = "Please enter Address")]
         public string Address { get; set; }
 

@@ -1,47 +1,59 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System_ASP_CORE.Models
 {
+    [Table("student_master")]
     public class StudentModel
     {
-        public int Id { get; set; }
+        [Key]
+        [Column("sid")]
+        public int sid { get; set; }
 
-        [Required(ErrorMessage = "Please enter First name")]
-        [StringLength(03, ErrorMessage = "First Name cannot exceed 50 characters")]
+        [Required]
+        [Column("firstname")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Please enter Last name")]
-        [StringLength(50, ErrorMessage = "Last Name cannot exceed 50 characters")]
+        [Required]
+        [Column("lastname")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Please enter Email")]
-        [EmailAddress(ErrorMessage = "Invalid Email format")]
+        [Required]
+        [EmailAddress]
+        [Column("email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Phone number is required")]
-        [Phone(ErrorMessage = "Invalid phone number")]
+        [Required]
+        [Column("phonenumber")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Emergency Phone number is required")]
-        [Phone(ErrorMessage = "Invalid phone number")]
+        [Required]
+        [Column("ephonenumber")]
         public string EmergencyPhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Please enter Date Of Birth")]
+        [Required]
         [DataType(DataType.Date)]
+        [Column("dob")]
         public DateTime DateOfBirth { get; set; }
-        [Required(ErrorMessage = "Please enter Address")]
+
+
+        [Required]
+        [Column("address")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Please select Class")]
+        [Required]
+        [Column("class")]
         public string Class { get; set; }
 
-        [Required(ErrorMessage = "Please select Gender")]
+        [Required]
+        [Column("gender")]
         public string Gender { get; set; }
 
-        public string ImagePath { get; set; } // Path to the saved image file
+        [Column("image")]
+        public string ImagePath { get; set; }
 
-        [Required(ErrorMessage = "Please upload an Image")]
-        public IFormFile StudentImage { get; set; } // Uploaded file
+        [NotMapped]
+        [Required(ErrorMessage = "Please upload an image")]
+        public IFormFile StudentImage { get; set; }
     }
-
 }

@@ -1,28 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using School_Management_System_ASP_CORE.Models;
 
-namespace School_Management_System_ASP_CORE.Data
+public class ApplicationDbContext : DbContext
 {
-    public class ApplicationDbContext : DbContext
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+    public DbSet<ManageClassModel> Classes { get; set; }
+    public DbSet<ManageSubjectModel> Subject_Master { get; set; }
+    public DbSet<StudentModel> Students { get; set; }
+
+    public DbSet<Faculty> Faculty { get; set; }
+
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        modelBuilder.Entity<ManageClassModel>().ToTable("master_class");
+        modelBuilder.Entity<ManageClassModel>().HasKey(c => c.class_id);
 
-        // ✅ Define DbSet for Classes
-        public DbSet<ManageClassModel> Classes { get; set; }
+        modelBuilder.Entity<ManageSubjectModel>().ToTable("master_subject");
+        modelBuilder.Entity<ManageSubjectModel>().HasKey(s => s.subject_id);
 
-        // ✅ Define DbSet for Subjects
-        public DbSet<ManageSubjectModel> Subject_Master { get; set; }
+        modelBuilder.Entity<StudentModel>().ToTable("student_master");
+        modelBuilder.Entity<StudentModel>().HasKey(s => s.sid);
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // ✅ Ensure correct table mapping for Classes
-            modelBuilder.Entity<ManageClassModel>().ToTable("master_class");
-
-            // ✅ Ensure correct table mapping for Subjects
-            modelBuilder.Entity<ManageSubjectModel>().ToTable("master_subject");
-
-            // ✅ Define primary key for Subject
-            modelBuilder.Entity<ManageSubjectModel>().HasKey(s => s.subject_id);
-        }
+        modelBuilder.Entity<Faculty>().ToTable("faculty_master");
+        modelBuilder.Entity<Faculty>().HasKey(f => f.fid);// Ensure the primary key is correctly mapped
     }
 }

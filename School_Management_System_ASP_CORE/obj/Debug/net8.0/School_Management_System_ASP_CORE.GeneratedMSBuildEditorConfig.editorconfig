@@ -62,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdF9TdWJqZWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/laragon/www/ASP.NET/School_Management_System_ASP_CORE/School_Management_System_ASP_CORE/Views/Admin/ManageFaculty.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlRmFjdWx0eS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

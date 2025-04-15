@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using School_Management_System_ASP_CORE.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using NuGet.Protocol.Plugins;
+
 using School_Management_System_ASP_CORE.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 
 namespace School_Management_System_ASP_CORE.Controllers
@@ -10,125 +14,300 @@ namespace School_Management_System_ASP_CORE.Controllers
     
     public class AdminController : Controller
     {
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Authentication logic
+            if (model.Email == "jvirani820@rku.ac.in" && model.Password == "password123")
+            {
+                return RedirectToAction("Dashboard", "Admin");
+            }
+
+            ModelState.AddModelError("", "Invalid email or password");
+            return View(model);
+        }
         public IActionResult Dashboard()
         {
             return View();
         }
 
+        private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _env;
+
+        public AdminController(ApplicationDbContext context, IWebHostEnvironment env)
+        {
+            _context = context;
+            _env = env;
+        }
+
         [HttpGet]
         public IActionResult AddStudent()
         {
+            var classList = _context.Classes
+                .Select(c => new SelectListItem
+                {
+                    Value = c.class_id.ToString(),
+                    Text = c.class_name
+                }).ToList();
+
+            ViewBag.ClassList = classList;
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddStudent(AdminModel model)
+        public async Task<IActionResult> AddStudent(StudentModel model)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index"); // Redirect after success
+                if (model.StudentImage != null)
+                {
+                    string folderPath = Path.Combine(_env.WebRootPath, "uploads");
+                    if (!Directory.Exists(folderPath))
+                        Directory.CreateDirectory(folderPath);
+
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.StudentImage.FileName);
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.StudentImage.CopyToAsync(stream);
+                    }
+
+                    model.ImagePath = "/uploads/" + fileName;
+                }
+
+                _context.Students.Add(model);
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Student added successfully!";
+                return RedirectToAction("AddStudent");
             }
-            return View(model); // Return view with validation messages
+
+            ViewBag.ClassList = _context.Classes
+                .Select(c => new SelectListItem
+                {
+                    Value = c.class_id.ToString(),
+                    Text = c.class_name
+                }).ToList();
+
+            return View(model);
         }
+
 
         public IActionResult ManageStudent()
         {
-            List<Student> students = new List<Student>
-            {
-                new Student { RollNo = 1, Name = "Tiger Nixon", Education = "M.COM, P.H.D.", Mobile = "123 456 7890", Email = "info@example.com", AdmissionDate = "25-04-2011" },
-                new Student { RollNo = 2, Name = "Garrett Winters", Education = "M.COM, P.H.D.", Mobile = "987 654 3210", Email = "info@example.com", AdmissionDate = "25-07-2011" },
-                new Student { RollNo = 3, Name = "Ashton Cox", Education = "B.COM, M.COM.", Mobile = "(123) 456 789", Email = "info@example.com", AdmissionDate = "12-01-2009" }
-            };
-
+            var students = _context.Students.ToList(); // Fetch all students from the database
             return View(students);
         }
         public class Student
         {
-            public int RollNo { get; set; }
-            public string Name { get; set; }
-            public string Education { get; set; }
-            public string Mobile { get; set; }
+            public int Sid { get; set; }  // Primary Key
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
             public string Email { get; set; }
-            public string AdmissionDate { get; set; }
+            public string PhoneNumber { get; set; }
+            public string EmergencyPhoneNumber { get; set; }
+            public DateTime DateOfBirth { get; set; }  // Database Date
+            public string Address { get; set; }
+            public string Class { get; set; }
+            public string Gender { get; set; }
+            public string ImagePath { get; set; }
+
+            // Not mapped to the database
+            [NotMapped]
+            public IFormFile StudentImage { get; set; }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateStudent(StudentModel model, IFormFile ImageFile)
+        {
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+                Directory.CreateDirectory(uploadsFolder);
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(stream);
+                }
+
+                model.ImagePath = "/uploads/" + uniqueFileName;
+            }
+            else
+            {
+                model.ImagePath = model.ImagePath;
+            }
+
+            // Save updated model to DB
+            _context.Students.Update(model);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ManageStudent");
+        }
+
+        // ✅ Delete Student
+        public IActionResult Delete_Student(int id)
+        {
+            var student = _context.Students.FirstOrDefault(s => s.sid == id);
+            if (student != null)
+            {
+                _context.Students.Remove(student); // ✅ Pass the student object here
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ManageStudent");
+        }
+        
+        [HttpGet]
         public IActionResult AddFaculty()
         {
             return View();
         }
-
+        // AddFaculty
         [HttpPost]
-        public IActionResult AddFaculty(FacultyModel model)
+        public async Task<IActionResult> AddFaculty(FacultyModel model)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index"); // Redirect after success
+                try
+                {
+                    string imagePath = null;
+
+                    // Image saving logic
+                    if (model.ImageFile != null && model.ImageFile.Length > 0)
+                    {
+                        string uploadsFolder = Path.Combine(_env.WebRootPath, "uploads");
+
+                        if (!Directory.Exists(uploadsFolder))
+                            Directory.CreateDirectory(uploadsFolder);
+
+                        string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await model.ImageFile.CopyToAsync(stream);
+                        }
+
+                        imagePath = "/uploads/" + uniqueFileName;
+                    }
+
+                    // Map FacultyModel to Faculty entity
+                    var faculty = new Faculty
+                    {
+                        firstname = model.FirstName,
+                        lastname = model.LastName,
+                        email = model.Email,
+                        phonenumber = model.PhoneNumber,
+                        ephonenumber = model.EmergencyPhoneNumber,
+                        dob = model.DateOfBirth,
+                        address = model.Address,
+                        gender = model.Gender,
+                        image = imagePath // Map to Image property in Faculty entity
+                    };
+
+                    // Directly add faculty to the database without migrations
+                    _context.Faculty.Add(faculty);
+                    await _context.SaveChangesAsync();
+
+                    TempData["Success"] = "Faculty added successfully!";
+                    return RedirectToAction("AddFaculty");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception caught while saving faculty: " + ex.ToString());
+                    TempData["Error"] = "An error occurred while adding the faculty. Please try again later.";
+                    return RedirectToAction("AddFaculty");
+                }
             }
-            return View(model); // Return view with validation messages
+
+            // If validation fails, return the view with validation errors
+            return View(model);
         }
+
         // GET: Faculty List
         public IActionResult ManageFaculty()
         {
-            List<FacultyModel> faculties = new List<FacultyModel> // ✅ Use FacultyModel
+            // Fetching all the faculties from the database
+            var faculties = _context.Faculty
+                .Select(f => new FacultyModel
+                {
+                    fid = f.fid,
+                    FirstName = f.firstname,
+                    LastName = f.lastname,
+                    Email = f.email,
+                    PhoneNumber = f.phonenumber,
+                    EmergencyPhoneNumber = f.ephonenumber,
+                    DateOfBirth = f.dob,
+                    Address = f.address,
+                    Gender = f.gender,
+                    ImagePath = f.image // Assuming Image is a property in the Faculty entity
+                }).ToList();
+
+            return View(faculties); // Passing the faculty data to the view
+        }
+        [HttpPost]
+        public IActionResult UpdateFaculty(FacultyModel faculty, IFormFile ImageFile)
+        {
+            // Check if a new image is uploaded
+            if (ImageFile != null && ImageFile.Length > 0)
             {
-                new FacultyModel
+                // Save the image to a folder
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", ImageFile.FileName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    FacultyID = 1,
-                    FirstName = "John",
-                    LastName = "Doe",
-                    Email = "john@example.com",
-                    PhoneNumber = "1234567890",
-                    EmergencyPhoneNumber = "9876543210",
-                    DateOfBirth = new DateTime(1985, 04, 25),
-                    Address = "New York",
-                    Department = "IT",
-                    Gender = "Male",
-                    JoiningDate = new DateTime(2011, 04, 25),
-                    ImagePath = "/images/faculty/john_doe.jpg" // ✅ Ensure ImagePath exists
-                },
-                new FacultyModel
-                {
-                    FacultyID = 2,
-                    FirstName = "Jane",
-                    LastName = "Smith",
-                    Email = "jane@example.com",
-                    PhoneNumber = "9876543210",
-                    EmergencyPhoneNumber = "1234567890",
-                    DateOfBirth = new DateTime(1987, 07, 15),
-                    Address = "Los Angeles",
-                    Department = "Finance",
-                    Gender = "Female",
-                    JoiningDate = new DateTime(2011, 07, 25),
-                    ImagePath = "/images/faculty/jane_smith.jpg"
+                    ImageFile.CopyTo(stream);
                 }
-            };
 
-            return View(faculties); // ✅ Ensure you pass FacultyModel
+                // Assign the new image path to the faculty model
+                faculty.ImagePath = "/uploads/" + ImageFile.FileName;
+            }
 
+            // Update the faculty details in the database
+            var existingFaculty = _context.Faculty.Find(faculty.fid);
+            if (existingFaculty != null)
+            {
+                existingFaculty.firstname = faculty.FirstName;
+                existingFaculty.lastname = faculty.LastName;
+                existingFaculty.phonenumber = faculty.PhoneNumber;
+                existingFaculty.ephonenumber = faculty.EmergencyPhoneNumber;
+                existingFaculty.email = faculty.Email;
+                existingFaculty.dob = faculty.DateOfBirth;
+                existingFaculty.gender = faculty.Gender;
+                existingFaculty.address = faculty.Address;
+                existingFaculty.image = faculty.ImagePath;
+
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("ManageFaculty");
         }
-    
-
-        // Updated Faculty Model
-        public class Faculty
+        // Delete Faculty
+        public IActionResult Delete_Faculty(int id)
         {
-            public int FacultyID { get; set; } // Renamed from RollNo
-
-            public string Name { get; set; }
-
-            public string Education { get; set; }
-
-            public string Mobile { get; set; }
-
-            public string Email { get; set; }
-
-            [DataType(DataType.Date)]
-            public DateTime? AdmissionDate { get; set; } // Changed from string to DateTime?
-        }
-        private readonly ApplicationDbContext _context;
-
-        public AdminController(ApplicationDbContext context)
-        {
-            _context = context;
+            var faculty = _context.Faculty.FirstOrDefault(f => f.fid == id);
+            if (faculty != null)
+            {
+                _context.Faculty.Remove(faculty);
+                _context.SaveChanges();
+                TempData["DeleteSuccess"] = "Faculty deleted successfully!";
+            }
+            return RedirectToAction("ManageFaculty");
         }
 
         public IActionResult ClassView()

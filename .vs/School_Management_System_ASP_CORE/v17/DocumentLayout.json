@@ -3,53 +3,39 @@
   "WorkspaceRootPath": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_JAYDEEP_DOCUMENTS_EDUSPHARE.MDF/True/SqlTable/dbo.master_subject.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\admin\\addfaculty.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\admin\\addfaculty.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\admin\\edit_subject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\admin\\edit_subject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\admin\\subjectview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\admin\\subjectview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\models\\managesubjectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\models\\managesubjectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\admin\\classview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\admin\\classview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Jaydeep\\AppData\\Local\\SourceServer\\243379d0530bb9640fef041009139e11c218c7dc3f37c213de182f20cec9446e\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\models\\facultymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\models\\facultymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_JAYDEEP_DOCUMENTS_EDUSPHARE.MDF/True/SqlTable/dbo.master_class.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\admin\\addstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\admin\\addstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\models\\studentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\models\\studentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\admin\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\admin\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\admin\\managefaculty.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\admin\\managefaculty.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\school_management_system_asp_core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\school_management_system_asp_core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\models\\adminmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\models\\adminmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_JAYDEEP_DOCUMENTS_EDUSPHARE.MDF/True/SqlTable/dbo.faculty_master.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,7 +45,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -71,75 +57,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "dbo.master_subject [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_JAYDEEP_DOCUMENTS_EDUSPHARE.MDF/True/SqlTable/dbo.master_subject.sql",
-              "ToolTip": "dbo.master_subject [Data]",
+              "DocumentIndex": 8,
+              "Title": "dbo.faculty_master [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_JAYDEEP_DOCUMENTS_EDUSPHARE.MDF/True/SqlTable/dbo.faculty_master.sql",
+              "ToolTip": "dbo.faculty_master [Data]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-03-25T16:04:05.185Z",
+              "WhenOpened": "2025-04-15T11:13:34.232Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Edit_Subject.cshtml",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\Edit_Subject.cshtml",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Admin\\Edit_Subject.cshtml",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\Edit_Subject.cshtml",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\Edit_Subject.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAiAAAA",
+              "DocumentIndex": 4,
+              "Title": "AddStudent.cshtml",
+              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\AddStudent.cshtml",
+              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Admin\\AddStudent.cshtml",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\AddStudent.cshtml",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\AddStudent.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T16:00:03.142Z",
+              "WhenOpened": "2025-04-15T10:18:45.628Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ClassView.cshtml",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\ClassView.cshtml",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Admin\\ClassView.cshtml",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\ClassView.cshtml",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\ClassView.cshtml",
-              "ViewState": "AQIAABQAAAAAAAAAAADwvzIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T15:56:36.313Z",
+              "Title": "StudentModel.cs",
+              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\StudentModel.cs",
+              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Models\\StudentModel.cs",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\StudentModel.cs",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Models\\StudentModel.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwAUAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T10:07:50.951Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\Jaydeep\\AppData\\Local\\SourceServer\\243379d0530bb9640fef041009139e11c218c7dc3f37c213de182f20cec9446e\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\Jaydeep\\AppData\\Local\\SourceServer\\243379d0530bb9640fef041009139e11c218c7dc3f37c213de182f20cec9446e\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs [Read Only]",
-              "ViewState": "AQIAAKAAAAAAAAAAAAD4v74AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T15:53:40.176Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ManageSubjectModel.cs",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\ManageSubjectModel.cs",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Models\\ManageSubjectModel.cs",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\ManageSubjectModel.cs",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\Models\\ManageSubjectModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T15:10:17.508Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SubjectView.cshtml",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\SubjectView.cshtml",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Admin\\SubjectView.cshtml",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\SubjectView.cshtml",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\SubjectView.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvykAAAAyAAAA",
+              "Title": "ManageFaculty.cshtml",
+              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\ManageFaculty.cshtml",
+              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Admin\\ManageFaculty.cshtml",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\ManageFaculty.cshtml",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\ManageFaculty.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAmwDUAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T15:11:17.733Z",
+              "WhenOpened": "2025-04-15T09:55:50.845Z",
               "EditorCaption": ""
             },
             {
@@ -148,86 +110,63 @@
               "Title": "AdminController.cs",
               "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
-              "ViewState": "AQIAAMcAAAAAAAAAAAAowNUAAAApAAAA",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs*",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Controllers\\AdminController.cs*",
+              "ViewState": "AQIAANMAAAAAAAAAAAAawPAAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T11:58:13.326Z",
+              "WhenOpened": "2025-04-15T09:57:52.595Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "dbo.master_class [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_JAYDEEP_DOCUMENTS_EDUSPHARE.MDF/True/SqlTable/dbo.master_class.sql",
-              "ToolTip": "dbo.master_class [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-03-25T12:24:59.801Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Data\\ApplicationDbContext.cs",
               "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAABQAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAwCEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T12:14:19.774Z",
+              "WhenOpened": "2025-04-15T09:57:12.808Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Program.cs",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Program.cs",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Program.cs",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAxAAAA",
+              "DocumentIndex": 1,
+              "Title": "FacultyModel.cs",
+              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\FacultyModel.cs",
+              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Models\\FacultyModel.cs",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\FacultyModel.cs",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Models\\FacultyModel.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAACsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T12:08:15.102Z",
+              "WhenOpened": "2025-04-15T09:55:36.389Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\appsettings.json",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\appsettings.json",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\appsettings.json",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\appsettings.json",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-25T12:06:47.033Z",
+              "DocumentIndex": 7,
+              "Title": "AdminModel.cs",
+              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\AdminModel.cs",
+              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Models\\AdminModel.cs",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Models\\AdminModel.cs",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Models\\AdminModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T09:55:27.547Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "School_Management_System_ASP_CORE.csproj",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAYAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-25T12:16:13.426Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Profile.cshtml",
-              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\Profile.cshtml",
-              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Admin\\Profile.cshtml",
-              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\Profile.cshtml",
-              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\Profile.cshtml",
-              "ViewState": "AQIAADwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "AddFaculty.cshtml",
+              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\AddFaculty.cshtml",
+              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Admin\\AddFaculty.cshtml",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Admin\\AddFaculty.cshtml",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Admin\\AddFaculty.cshtml",
+              "ViewState": "AQIAADkAAAAAAAAAAAAmwFwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T11:57:32.066Z",
+              "WhenOpened": "2025-04-15T09:54:40.254Z",
               "EditorCaption": ""
             }
           ]

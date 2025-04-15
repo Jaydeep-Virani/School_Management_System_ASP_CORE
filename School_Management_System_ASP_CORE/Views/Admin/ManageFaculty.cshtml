@@ -1,4 +1,5 @@
 ﻿@model List<School_Management_System_ASP_CORE.Models.FacultyModel>
+
 @{
     ViewData["Title"] = "Faculty Management";
 }
@@ -22,57 +23,96 @@
     <table class="table-auto border border-gray-300 rounded w-full text-sm shadow-lg">
         <thead>
             <tr class="bg-blue-500 text-white">
-                <th class="px-4 py-2">Photo</th>
-                <th class="px-4 py-2">Faculty ID</th>
-                <th class="px-4 py-2">First Name</th>
-                <th class="px-4 py-2">Last Name</th>
-                <th class="px-4 py-2">Email</th>
-                <th class="px-4 py-2">Phone No.</th>
-                <th class="px-4 py-2">Emergency Phone</th>
-                <th class="px-4 py-2">Date of Birth</th>
-                <th class="px-4 py-2">Address</th>
-                <th class="px-4 py-2">Department</th>
-                <th class="px-4 py-2">Gender</th>
-                <th class="px-4 py-2">Joining Date</th>
-                <th class="px-4 py-2">Action</th>
+                <th class="px-4 py-2 text-left">Faculty ID</th>
+                <th class="px-4 py-2 text-left">Photo</th>
+                <th class="px-4 py-2 text-left">First Name</th>
+                <th class="px-4 py-2 text-left">Last Name</th>
+                <th class="px-4 py-2 text-left">Email</th>
+                <th class="px-4 py-2 text-left">Phone No.</th>
+                <th class="px-4 py-2 text-left">Emergency Phone</th>
+                <th class="px-4 py-2 text-left">Date of Birth</th>
+                <th class="px-4 py-2 text-left">Address</th>
+                <th class="px-4 py-2 text-left">Gender</th>
+                <th class="px-4 py-2 text-left">Action</th>
             </tr>
         </thead>
-        <tbody id="facultyTable">
+        <tbody id="facultyTable" class="bg-white text-sm text-gray-800">
             @foreach (var faculty in Model)
             {
                 <tr class="border-b text-gray-700">
+                    <td class="px-4 py-2">@faculty.fid</td>
                     <td class="px-4 py-2">
                         @if (!string.IsNullOrEmpty(faculty.ImagePath))
                         {
-                            <img src="@Url.Content(faculty.ImagePath)" alt="Faculty Photo" class="w-12 h-12 rounded-full border shadow-md">
+                            var imagePath = faculty.ImagePath.ToString();  // Convert IHtmlContent to string
+                            // Example of replacing "oldString" if needed; adjust according to your case
+                            imagePath = imagePath.Replace("oldString", "newString"); // Apply replace if needed
+                            <img src="@Url.Content(imagePath)" alt="Faculty Photo" class="w-12 h-12 rounded-full border shadow-md">
                         }
                         else
                         {
-                            <span class="text-gray-400">No Image</span>
+                            <img src="#" alt="Faculty Photo" class="w-12 h-12 rounded-full border shadow-md">
                         }
                     </td>
-                    <td class="px-4 py-2">@faculty.FacultyID</td>
                     <td class="px-4 py-2">@faculty.FirstName</td>
                     <td class="px-4 py-2">@faculty.LastName</td>
                     <td class="px-4 py-2">@faculty.Email</td>
                     <td class="px-4 py-2">@faculty.PhoneNumber</td>
                     <td class="px-4 py-2">@faculty.EmergencyPhoneNumber</td>
-                    <td class="px-4 py-2">@(faculty.DateOfBirth?.ToString("dd-MM-yyyy") ?? "N/A")</td>
+                    <td class="px-4 py-2">@(faculty.DateOfBirth.ToString("dd-MM-yyyy") ?? "N/A")</td>
                     <td class="px-4 py-2">@faculty.Address</td>
-                    <td class="px-4 py-2">@faculty.Department</td>
                     <td class="px-4 py-2">@faculty.Gender</td>
-                    <td class="px-4 py-2">@(faculty.JoiningDate?.ToString("dd-MM-yyyy") ?? "N/A")</td>
                     <td class="px-4 py-2 text-center">
-                        <a asp-action="Edit" asp-route-id="@faculty.FacultyID" class="text-blue-600 hover:text-blue-800 mx-2"><i class="fas fa-edit"></i></a>
-                        <a asp-action="Delete" asp-route-id="@faculty.FacultyID" class="text-red-600 hover:text-red-800 mx-2"><i class="fas fa-trash-alt"></i></a>
+                        <a href="javascript:void(0)"
+                           onclick="openEditModalFromBase64('@Html.Raw(Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(faculty))))')"
+                           class="text-blue-600 hover:text-blue-800 mx-1">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a asp-action="Delete_Faculty" asp-route-id="@faculty.fid" class="text-red-600 hover:text-red-800 mx-1">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
                     </td>
+
                 </tr>
             }
         </tbody>
     </table>
 </div>
 
+
+
 <script>
+    function openEditModalFromBase64(encoded) {
+        try {
+            const json = atob(encoded); // Base64 decode
+            const faculty = JSON.parse(json); // Parse the decoded string into an object
+            openEditModal(faculty); // Open the modal with faculty data
+        } catch (e) {
+            console.error("Invalid faculty data:", e);
+            alert("Failed to load faculty data for editing.");
+        }
+    }
+
+    function openEditModal(faculty) {
+        document.getElementById("sid").value = faculty.fid;
+        document.getElementById("FirstName").value = faculty.FirstName;
+        document.getElementById("LastName").value = faculty.LastName;
+        document.getElementById("PhoneNumber").value = faculty.PhoneNumber;
+        document.getElementById("EmergencyPhoneNumber").value = faculty.EmergencyPhoneNumber;
+        document.getElementById("Email").value = faculty.Email;
+        document.getElementById("DateOfBirth").value = faculty.DateOfBirth ? faculty.DateOfBirth.toString().split('T')[0] : ''; // Format as YYYY-MM-DD
+        document.getElementById("Gender").value = faculty.Gender;
+        document.getElementById("Address").value = faculty.Address;
+        document.getElementById("ExistingImagePath").value = faculty.ImagePath; // Store image path for updating
+
+        // Show the modal
+        document.getElementById("editModal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("editModal").style.display = "none";
+    }
+
     function searchTable() {
         var input, filter, table, tr, td, i, j, txtValue;
         input = document.getElementById("searchBox");
@@ -97,3 +137,90 @@
         }
     }
 </script>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+        @if (TempData["DeleteSuccess"] != null)
+        {
+            <text>
+                    toastr.options = {
+                    "closeButton": true,
+                        "debug": false,
+                            "newestOnTop": true,
+                                "progressBar": true,
+                                    "positionClass": "toast-top-center", // 👈 This centers the toast
+                                        "preventDuplicates": true,
+                                            "onclick": null,
+                                                "showDuration": "300",
+                                                    "hideDuration": "1000",
+                                                        "timeOut": "3000",
+                                                            "extendedTimeOut": "1000",
+                                                                "showEasing": "swing",
+                                                                    "hideEasing": "linear",
+                                                                        "showMethod": "fadeIn",
+                                                                            "hideMethod": "fadeOut"
+                };
+                toastr.success('@TempData["DeleteSuccess"]');
+            </text>
+        }
+                });
+    </script>
+}
+
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center h-100 justify-center hidden">
+    <div class="bg-white p-4 rounded-lg w-full max-w-xl max-h-[85vh] overflow-y-auto">
+        <h2 class="text-xl font-semibold mb-4">Edit Faculty</h2>
+        <form id="editForm" method="post" enctype="multipart/form-data" asp-action="UpdateFaculty" asp-controller="Admin">
+            <input type="hidden" name="fid" id="sid" />
+            <input type="hidden" name="ExistingImagePath" id="ExistingImagePath" />
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">First Name</label>
+                <input type="text" name="FirstName" id="FirstName" class="w-full border px-4 py-2 rounded" required />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Last Name</label>
+                <input type="text" name="LastName" id="LastName" class="w-full border px-4 py-2 rounded" required />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Mobile No</label>
+                <input type="text" name="PhoneNumber" id="PhoneNumber" class="w-full border px-4 py-2 rounded" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Emergency Mobile No</label>
+                <input type="text" name="EmergencyPhoneNumber" id="EmergencyPhoneNumber" class="w-full border px-4 py-2 rounded" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold" readonly>Email</label>
+                <input type="email" name="Email" id="Email" class="w-full border px-4 py-2 rounded" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Birth Date</label>
+                <input type="date" name="DateOfBirth" id="DateOfBirth" class="w-full border px-4 py-2 rounded" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Gender</label>
+                <select name="Gender" id="Gender" class="w-full border px-4 py-2 rounded">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Address</label>
+                <textarea name="Address" id="Address" class="w-full border px-4 py-2 rounded" rows="2"></textarea>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Photo</label>
+                <input type="file" name="ImageFile" class="w-full border px-4 py-2 rounded" />
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button type="button" onclick="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Update</button>
+            </div>
+        </form>
+    </div>
+</div>

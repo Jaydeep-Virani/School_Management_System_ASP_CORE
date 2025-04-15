@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\School_Management_System_ASP_CORE.bundle.scp.css"
     },
     {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\Logo\\IMG_1599.PNG",
+      "PackagePath": "staticwebassets\\Logo\\IMG_1599.PNG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\Logo\\IMG_1700.PNG",
+      "PackagePath": "staticwebassets\\Logo\\IMG_1700.PNG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\Logo\\auth_bg.jpg",
+      "PackagePath": "staticwebassets\\Logo\\auth_bg.jpg"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\Logo\\profile.png",
+      "PackagePath": "staticwebassets\\Logo\\profile.png"
+    },
+    {
       "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -243,6 +259,98 @@
     {
       "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\0ae0c6f6-84e4-445d-8dc0-fe48031ea0f2.JPG",
+      "PackagePath": "staticwebassets\\uploads\\0ae0c6f6-84e4-445d-8dc0-fe48031ea0f2.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\0c06c847-f125-4dd8-adb8-ee99dad1d6e5.JPG",
+      "PackagePath": "staticwebassets\\uploads\\0c06c847-f125-4dd8-adb8-ee99dad1d6e5.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\10358483.png",
+      "PackagePath": "staticwebassets\\uploads\\10358483.png"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\20af4b21-9684-4f6c-9bc8-acbb2bd14aeb.JPG",
+      "PackagePath": "staticwebassets\\uploads\\20af4b21-9684-4f6c-9bc8-acbb2bd14aeb.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\285a962e-cba7-40f2-b8ab-be856ce571ec.JPG",
+      "PackagePath": "staticwebassets\\uploads\\285a962e-cba7-40f2-b8ab-be856ce571ec.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\2b8f9812-a2c2-4796-bbf5-d65fc347dc97.JPG",
+      "PackagePath": "staticwebassets\\uploads\\2b8f9812-a2c2-4796-bbf5-d65fc347dc97.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\50fa2006-e261-4e6c-a03c-136088c24bd5.JPG",
+      "PackagePath": "staticwebassets\\uploads\\50fa2006-e261-4e6c-a03c-136088c24bd5.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\53071889-309f-4b17-82b3-24becd3d7909.JPG",
+      "PackagePath": "staticwebassets\\uploads\\53071889-309f-4b17-82b3-24becd3d7909.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\5e08b0cc-bc78-4063-8a85-ce84d84349df.JPG",
+      "PackagePath": "staticwebassets\\uploads\\5e08b0cc-bc78-4063-8a85-ce84d84349df.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\640ef0fc-1896-495e-94a8-399bcc7b5ab7.JPG",
+      "PackagePath": "staticwebassets\\uploads\\640ef0fc-1896-495e-94a8-399bcc7b5ab7.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\66e1c0ab-8f57-4e64-9e9d-fe74abb915b7.JPG",
+      "PackagePath": "staticwebassets\\uploads\\66e1c0ab-8f57-4e64-9e9d-fe74abb915b7.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\6cff3ed3-4a15-43a3-9aa4-3fdf6f82d8fd.JPG",
+      "PackagePath": "staticwebassets\\uploads\\6cff3ed3-4a15-43a3-9aa4-3fdf6f82d8fd.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\74e0e4de-06b8-42bb-85bf-633d155ddad8.JPG",
+      "PackagePath": "staticwebassets\\uploads\\74e0e4de-06b8-42bb-85bf-633d155ddad8.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\7f282e0e-45c9-46fe-ab84-42e76c9a1ad6.JPG",
+      "PackagePath": "staticwebassets\\uploads\\7f282e0e-45c9-46fe-ab84-42e76c9a1ad6.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\9d6b04fe-6a8c-4201-b213-f457f53e2c4f.JPG",
+      "PackagePath": "staticwebassets\\uploads\\9d6b04fe-6a8c-4201-b213-f457f53e2c4f.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\b11cd212-38ce-4fbb-9ca3-f4c1fa8ce66e.png",
+      "PackagePath": "staticwebassets\\uploads\\b11cd212-38ce-4fbb-9ca3-f4c1fa8ce66e.png"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\b67f58dd-a0b9-4236-9d18-7bb75b979278.JPG",
+      "PackagePath": "staticwebassets\\uploads\\b67f58dd-a0b9-4236-9d18-7bb75b979278.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\c50bbf13-5497-4eec-b398-d31f04390016.JPG",
+      "PackagePath": "staticwebassets\\uploads\\c50bbf13-5497-4eec-b398-d31f04390016.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\cc7e9313-486d-42ce-8fa1-f951e6abfce1.JPG",
+      "PackagePath": "staticwebassets\\uploads\\cc7e9313-486d-42ce-8fa1-f951e6abfce1.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\d2dd8b89-bfbb-4a24-bd6d-da5363881aaa.JPG",
+      "PackagePath": "staticwebassets\\uploads\\d2dd8b89-bfbb-4a24-bd6d-da5363881aaa.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\dd770191-0d73-4047-802b-ffff4cc1e980.JPG",
+      "PackagePath": "staticwebassets\\uploads\\dd770191-0d73-4047-802b-ffff4cc1e980.JPG"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\e05af277-9a4e-4d13-9ee2-b0812e6db09a.png",
+      "PackagePath": "staticwebassets\\uploads\\e05af277-9a4e-4d13-9ee2-b0812e6db09a.png"
+    },
+    {
+      "Id": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\wwwroot\\uploads\\ff5e6cda-3ae3-4565-88bd-fa099ad2999c.JPG",
+      "PackagePath": "staticwebassets\\uploads\\ff5e6cda-3ae3-4565-88bd-fa099ad2999c.JPG"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.School_Management_System_ASP_CORE.Microsoft.AspNetCore.StaticWebAssets.props",
