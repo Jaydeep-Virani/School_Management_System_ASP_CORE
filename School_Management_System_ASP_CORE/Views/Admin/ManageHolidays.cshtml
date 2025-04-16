@@ -1,8 +1,34 @@
-﻿@model List<School_Management_System_ASP_CORE.Models.HolidayModel>
+﻿@model List<School_Management_System_ASP_CORE.Models.Holidays>
 @{
     ViewData["Title"] = "Holiday Management";
-    int selectedMonth = ViewBag.Month;
+    int selectedMonth = ViewBag.Month;  // Get the selected month from ViewBag
 }
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            toastr.options = {
+                "positionClass": "toast-top-center", // 💥 Centered at the top
+                "timeOut": "3000",                   // Optional: auto-dismiss after 3s
+                "closeButton": true,                 // Optional: show close (×) button
+                "progressBar": true                  // Optional: show progress bar
+            };
+
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    toastr.success("@TempData["Success"]");
+            </text>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <text>
+                    toastr.error("@TempData["Error"]");
+            </text>
+        }
+                        });
+    </script>
+}
+
 
 <div class="container mx-auto p-4 bg-white rounded-lg shadow">
     <a asp-action="AddHoliday" class="mb-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">+ Add Holiday</a>
@@ -14,9 +40,9 @@
             <ul>
                 @for (int i = 1; i <= 12; i++)
                 {
-                    <li class="p-2 bg-gray-100 rounded mb-2 cursor-pointer hover:bg-gray-200"
+                    <li class="p-2 rounded mb-2 cursor-pointer hover:bg-gray-200"
                         onclick="loadHolidays(@i)"
-                        style="@(selectedMonth == i ? "font-weight: bold;" : "")">
+                        style="@(selectedMonth == i ? "background-color: #3b82f6; color: white;" : "")">
                         @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
                     </li>
                 }
@@ -39,17 +65,36 @@
                     </tr>
                 </thead>
                 <tbody id="holidayTable">
+                    @{
+                        var id = 1;
+                    }
                     @foreach (var holiday in Model)
                     {
+                        var encodedHoliday = Convert.ToBase64String(
+                        System.Text.Encoding.UTF8.GetBytes(
+                        Newtonsoft.Json.JsonConvert.SerializeObject(new
+                        {
+                            Id = holiday.Id,
+                            Name = holiday.Name,
+                            Date = holiday.Date.ToString("yyyy-MM-dd") // match input[type="date"]
+                        })
+                        )
+                        );
+
                         <tr class="border-t">
-                            <td class="p-2">@holiday.Id</td>
+                            <td class="p-2">@id</td>
                             <td class="p-2">@holiday.Name</td>
                             <td class="p-2">@holiday.Date.ToString("dd-MM-yyyy")</td>
                             <td class="p-2">
-                                <a asp-action="EditHoliday" asp-route-id="@holiday.Id" class="text-blue-500 hover:text-blue-700 mr-2">✏️ Edit</a>
-                                <a asp-action="DeleteHoliday" asp-route-id="@holiday.Id" class="text-red-500 hover:text-red-700">🗑 Delete</a>
+                                <a href="javascript:void(0)"
+                                   onclick="openEditModalFromBase64('@encodedHoliday')"
+                                   class="text-blue-600 hover:text-blue-800 mx-1">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Delete_Holiday" asp-route-id="@holiday.Id" class="text-red-600 hover:text-red-800 mx-1"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
+                        id++;
                     }
                 </tbody>
             </table>
@@ -57,40 +102,63 @@
     </div>
 </div>
 
+<!-- Edit Holiday Modal -->
+<div id="editModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-4 rounded-lg w-full max-w-xl max-h-[85vh] overflow-y-auto">
+        <h2 class="text-xl font-semibold mb-4">Edit Holiday</h2>
+        <form id="editForm" method="post" enctype="multipart/form-data" asp-action="UpdateHoliday" asp-controller="Admin">
+            <input type="hidden" name="Id" id="HolidayId" />
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Holiday Name</label>
+                <input type="text" name="Name" id="HolidayName" class="w-full border px-4 py-2 rounded" required />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Holiday Date</label>
+                <input type="date" name="Date" id="HolidayDate" class="w-full border px-4 py-2 rounded" required />
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button type="button" onclick="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Scripts -->
 <script>
+    // Handle month click
     function loadHolidays(month) {
-        fetch(`/Holiday/GetHolidaysByMonth?month=${month}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById("monthName").innerText = new Date(2025, month - 1, 1).toLocaleString('en-us', { month: 'long' });
+        window.location.href = `/Admin/ManageHolidays?month=${month}`;
+    }
 
-                let holidayTable = document.getElementById("holidayTable");
-                holidayTable.innerHTML = "";
+    // Decode and parse holiday data
+    function openEditModalFromBase64(encoded) {
+        try {
+            const json = atob(encoded); // base64 decode only
+            const holiday = JSON.parse(json);
+            openEditModal(holiday);
+        } catch (e) {
+            console.error("Invalid holiday data:", e);
+            alert("Failed to load holiday data for editing.");
+        }
+    }
 
-                if (data.length === 0) {
-                    holidayTable.innerHTML = `<tr><td colspan="4" class="p-2 text-gray-500">No holidays found for this month</td></tr>`;
-                } else {
-                    data.forEach((holiday, index) => {
-                        holidayTable.innerHTML += `
-                                <tr class="border-t">
-                                    <td class="p-2">${index + 1}</td>
-                                    <td class="p-2">${holiday.name}</td>
-                                    <td class="p-2">${new Date(holiday.date).toLocaleDateString()}</td>
-                                    <td class="p-2">
-                                        <a href="/Holiday/EditHoliday/${holiday.id}" class="text-blue-500 hover:text-blue-700 mr-2">✏️ Edit</a>
-                                        <a href="/Holiday/DeleteHoliday/${holiday.id}" class="text-red-500 hover:text-red-700">🗑 Delete</a>
-                                    </td>
-                                </tr>
-                            `;
-                    });
-                }
-            })
-            .catch(error => console.error('Error fetching holidays:', error));
+    // Open and populate modal
+    function openEditModal(holiday) {
+        document.getElementById("HolidayId").value = holiday.Id;
+        document.getElementById("HolidayName").value = holiday.Name;
+        document.getElementById("HolidayDate").value = holiday.Date;
+        document.getElementById("editModal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("editModal").style.display = "none";
     }
 </script>
 
+<style>
+    #editModal {
+        display: none;
+        z-index: 9999;
+    }
+</style>

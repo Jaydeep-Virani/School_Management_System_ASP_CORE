@@ -12,14 +12,16 @@
             <h2 class="text-lg font-semibold mt-4">@Model.FirstName @Model.LastName</h2>
             <p class="text-gray-500">Project Manager</p>
             <div class="mt-4 flex flex-wrap justify-center gap-2">
-                <a asp-action="EditProfile" asp-route-id="@Model.ProfileID"
+
+                <button onclick="openProfilePicModal()"
                    class="bg-blue-500 text-white py-2 px-4 rounded-lg inline-flex items-center">
                     <i class="fas fa-edit mr-2"></i> Edit Profile
-                </a>
-                <a asp-action="DeleteProfile" asp-route-id="@Model.ProfileID"
+                </button>
+
+                <!--  <a asp-action="DeleteProfile" asp-route-id="@Model.ProfileID"
                    class="bg-red-500 text-white py-2 px-4 rounded-lg inline-flex items-center">
                     <i class="fas fa-trash-alt mr-2"></i> Delete Profile
-                </a>
+                </a> -->
             </div>
         </div>
 
@@ -114,7 +116,70 @@
     </div>
 </div>
 
+<!-- Profile Picture Modal -->
+<div id="profilePicModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">Update Profile Picture</h3>
+            <button onclick="closeProfilePicModal()" class="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+        </div>
+
+        <form asp-action="UpdateProfilePicture" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label class="block font-medium mb-1">Select Image</label>
+                <input type="file" name="ProfilePicture" accept="image/*" class="w-full border rounded p-2" required />
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button type="button" onclick="closeProfilePicModal()" class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Upload</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Profile updated successfully!',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            </text>
+        }
+    </script>
+
+    <script>
+        @if (TempData["Profile_Success"] != null)
+        {
+            <text>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Profile Picture Update Successfully!',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            </text>
+        }
+    </script>
+}
+
 <script>
+    function openProfilePicModal() {
+        document.getElementById('profilePicModal').classList.remove('hidden');
+        document.getElementById('profilePicModal').classList.add('flex');
+    }
+
+    function closeProfilePicModal() {
+        document.getElementById('profilePicModal').classList.add('hidden');
+        document.getElementById('profilePicModal').classList.remove('flex');
+    }
+
     function showTab(tabId) {
         document.getElementById("overview").classList.add("hidden");
         document.getElementById("editProfile").classList.add("hidden");

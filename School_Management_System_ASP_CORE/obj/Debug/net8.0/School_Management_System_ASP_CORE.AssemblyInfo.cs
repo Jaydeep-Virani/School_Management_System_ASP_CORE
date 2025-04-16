@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("School_Management_System_ASP_CORE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+349c7d2192563ba027c82604d9741a99188bbaa0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b4dc6c7ce5cc2f2717dd4454658bfdf49427102")]
 [assembly: System.Reflection.AssemblyProductAttribute("School_Management_System_ASP_CORE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("School_Management_System_ASP_CORE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -2,6 +2,23 @@
     ViewData["Title"] = "Dashboard";
 }
 
+@if (TempData["ToastMessage"] != null)
+{
+    <div id="toast" class="bg-green-200 text-green-800 p-3 mb-1 rounded transition-opacity duration-500 ease-in-out">
+        @TempData["ToastMessage"]
+    </div>
+
+    <script>
+        setTimeout(function () {
+            var toast = document.getElementById('toast');
+            if (toast) {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.style.display = 'none', 500); // Fully remove after fade out
+            }
+        }, 2000);
+    </script>
+}
+
 <div class="container mx-auto p-6">
     <div class="flex flex-wrap gap-6 justify-start">
         <!-- Students -->

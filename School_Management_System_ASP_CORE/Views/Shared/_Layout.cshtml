@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -70,14 +72,20 @@
 </head>
 <body>
     <header>
+        @{
+            var session = HttpContextAccessor.HttpContext.Session;
+            var firstName = session.GetString("first_name");
+            var lastName = session.GetString("last_name");
+            var image = session.GetString("image");
+        }
         <nav class="w-full bg-blue-600 text-white p-4">
             <div class="flex justify-between items-center max-w-full">
                 <h1 class="text-lg font-bold"> <img src="/Logo/IMG_1599.PNG" alt="Profile Picture" class="w-70 h-10 pl-3" /></h1>
                 <div class="flex items-center space-x-4">
-                    <img src="/Logo/profile.png" alt="Profile Picture" class="rounded-full w-10 h-10" />
+                    <img src="@image" alt="Profile Picture" class="rounded-full w-10 h-10" />
                     <div class="relative">
                         <button id="dropdownButton" class="flex items-center space-x-2">
-                            <span>Jaydeep Virani</span>
+                            <span>@firstName @lastName</span>
                             <i class="fas fa-caret-down"></i>
                         </button>
                         <div id="dropdownMenu" class="absolute right-0 mt-2 bg-white text-black rounded shadow-lg hidden w-40">
@@ -96,7 +104,7 @@
 
                                 <li class="font-bold hover:font-bold hover:scale-105 px-4 py-2 flex items-center text-red-600">
                                     <i class="fas fa-sign-out-alt mr-2"></i>
-                                    <a asp-controller="Admin" asp-action="Login" class="hover:underline">Logout</a>
+                                    <a asp-controller="Admin" asp-action="Logout" class="hover:underline">Logout</a>
                                 </li>
                             </ul>
                         </div>

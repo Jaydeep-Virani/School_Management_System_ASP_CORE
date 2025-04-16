@@ -6,29 +6,29 @@ namespace School_Management_System_ASP_CORE.Models
     {
         public int ProfileID { get; set; }
 
-        [Required(ErrorMessage = "Please enter First name")]
+        [Required]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Please enter Last name")]
+        [Required]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Please enter Email")]
-        [EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please enter phone number")]
-        [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Phone number must be 10 digits")]
+        [Phone]
         public string PhoneNumber { get; set; }
 
-        // ✅ Add This Line to Fix the Error
+        [Phone]
         public string EmergencyPhoneNumber { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
 
-        public string Address { get; set; }
         public string Gender { get; set; }
+
+        public string Address { get; set; }
+
         public string Role { get; set; }
+
         public string ImagePath { get; set; }
 
 

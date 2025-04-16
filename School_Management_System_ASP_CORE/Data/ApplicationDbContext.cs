@@ -11,7 +11,11 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Faculty> Faculty { get; set; }
 
+    public DbSet<User> Users { get; set; }
 
+    public DbSet<Holidays> Holidays { get; set; }
+
+    public DbSet<Admin> Admin { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ManageClassModel>().ToTable("master_class");
@@ -24,6 +28,15 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<StudentModel>().HasKey(s => s.sid);
 
         modelBuilder.Entity<Faculty>().ToTable("faculty_master");
-        modelBuilder.Entity<Faculty>().HasKey(f => f.fid);// Ensure the primary key is correctly mapped
+        modelBuilder.Entity<Faculty>().HasKey(f => f.fid);
+
+        modelBuilder.Entity<User>().ToTable("users");
+        modelBuilder.Entity<User>().HasKey(u => u.Id);
+
+        modelBuilder.Entity<Holidays>().ToTable("holiday_master");
+        modelBuilder.Entity<Holidays>().HasKey(h => h.Id);
+
+        modelBuilder.Entity<Admin>().ToTable("admin_master");
+        modelBuilder.Entity<Admin>().HasKey(a => a.Id);
     }
 }

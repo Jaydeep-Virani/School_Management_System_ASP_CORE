@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using NuGet.Protocol.Plugins;
-
+using Microsoft.EntityFrameworkCore;
 using School_Management_System_ASP_CORE.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using static School_Management_System_ASP_CORE.Controllers.AdminController;
 
 namespace School_Management_System_ASP_CORE.Controllers
 {
@@ -20,7 +21,6 @@ namespace School_Management_System_ASP_CORE.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
@@ -29,19 +29,95 @@ namespace School_Management_System_ASP_CORE.Controllers
                 return View(model);
             }
 
-            // Authentication logic
-            if (model.Email == "jvirani820@rku.ac.in" && model.Password == "password123")
+            // 🔹 First, check if the email exists
+            var user = _context.Users.FirstOrDefault(u => u.email == model.Email);
+
+            if (user == null)
             {
-                return RedirectToAction("Dashboard", "Admin");
+                ModelState.AddModelError("", "Email is not registered.");
+                return View(model);
             }
 
-            ModelState.AddModelError("", "Invalid email or password");
+            // 🔹 Then, check if the password is correct
+            if (user.password != model.Password)
+            {
+                ModelState.AddModelError("", "Incorrect password.");
+                return View(model);
+            }
+
+            // 🔹 Store common session values
+            HttpContext.Session.SetString("email", user.email);
+            HttpContext.Session.SetString("role", user.role);
+
+            // 🔹 Role-specific logic with full session setup
+            if (user.role == "admin")
+            {
+                var admin = _context.Admin.FirstOrDefault(a => a.email == user.email);
+                if (admin != null)
+                {
+                    HttpContext.Session.SetString("first_name", admin.firstname);
+                    HttpContext.Session.SetString("last_name", admin.lastname);
+                    HttpContext.Session.SetString("gender", admin.gender);
+                    HttpContext.Session.SetString("dob", admin.dob.ToString("yyyy-MM-dd"));
+                    HttpContext.Session.SetString("phonenumber", admin.phonenumber);
+                    HttpContext.Session.SetString("ephonenumber", admin.ephonenumber);
+                    HttpContext.Session.SetString("image", admin.image);
+
+                    TempData["ToastMessage"] = $"Welcome {admin.firstname} {admin.lastname}!";
+                    return RedirectToAction("Dashboard");
+                }
+            }
+            else if (user.role == "faculty")
+            {
+                var faculty = _context.Faculty.FirstOrDefault(f => f.email == user.email);
+                if (faculty != null)
+                {
+                    HttpContext.Session.SetString("first_name", faculty.firstname);
+                    HttpContext.Session.SetString("last_name", faculty.lastname);
+                    HttpContext.Session.SetString("gender", faculty.gender);
+                    HttpContext.Session.SetString("dob", faculty.dob.ToString("yyyy-MM-dd"));
+                    HttpContext.Session.SetString("phonenumber", faculty.phonenumber);
+                    HttpContext.Session.SetString("ephonenumber", faculty.ephonenumber);
+                    HttpContext.Session.SetString("image", faculty.image);
+
+                    TempData["ToastMessage"] = $"Welcome {faculty.firstname} {faculty.lastname}!";
+                    return RedirectToAction("Dashboard");
+                }
+            }
+            else if (user.role == "student")
+            {
+                var student = _context.Students.FirstOrDefault(s => s.Email == user.email);
+                if (student != null)
+                {
+                    HttpContext.Session.SetString("first_name", student.FirstName);
+                    HttpContext.Session.SetString("last_name", student.LastName);
+                    HttpContext.Session.SetString("gender", student.Gender);
+                    HttpContext.Session.SetString("dob", student.DateOfBirth.ToString("yyyy-MM-dd"));
+                    HttpContext.Session.SetString("phonenumber", student.PhoneNumber);
+                    HttpContext.Session.SetString("ephonenumber", student.EmergencyPhoneNumber);
+                    HttpContext.Session.SetString("image", student.ImagePath);
+
+                    TempData["ToastMessage"] = $"Welcome {student.FirstName} {student.LastName}!";
+                    return RedirectToAction("Dashboard");
+                }
+            }
+
+            // 🔹 Fallback if role found but not mapped properly
+            ModelState.AddModelError("", "User details not found for the specified role.");
             return View(model);
+        }
+
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // 🔹 Clear all session data
+            return RedirectToAction("Login"); // 🔹 Redirect to login or home
         }
         public IActionResult Dashboard()
         {
             return View();
         }
+
 
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
@@ -72,6 +148,7 @@ namespace School_Management_System_ASP_CORE.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Handle image upload
                 if (model.StudentImage != null)
                 {
                     string folderPath = Path.Combine(_env.WebRootPath, "uploads");
@@ -89,13 +166,26 @@ namespace School_Management_System_ASP_CORE.Controllers
                     model.ImagePath = "/uploads/" + fileName;
                 }
 
+                // Save student to database
                 _context.Students.Add(model);
+                await _context.SaveChangesAsync();
+
+                // Add user login credentials
+                var user = new User
+                {
+                    email = model.Email,
+                    password = "123456", // You should hash this in production
+                    role = "student"
+                };
+
+                _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
                 TempData["Success"] = "Student added successfully!";
                 return RedirectToAction("AddStudent");
             }
 
+            // Reload class list in case of validation error
             ViewBag.ClassList = _context.Classes
                 .Select(c => new SelectListItem
                 {
@@ -105,6 +195,7 @@ namespace School_Management_System_ASP_CORE.Controllers
 
             return View(model);
         }
+
 
 
         public IActionResult ManageStudent()
@@ -164,14 +255,25 @@ namespace School_Management_System_ASP_CORE.Controllers
         public IActionResult Delete_Student(int id)
         {
             var student = _context.Students.FirstOrDefault(s => s.sid == id);
+
             if (student != null)
             {
-                _context.Students.Remove(student); // ✅ Pass the student object here
+                // Find and remove the user with the same email
+                var user = _context.Users.FirstOrDefault(u => u.email == student.Email);
+                if (user != null)
+                {
+                    _context.Users.Remove(user);
+                }
+
+                // Remove student
+                _context.Students.Remove(student);
                 _context.SaveChanges();
             }
+
+            TempData["Success"] = "Student deleted successfully!";
             return RedirectToAction("ManageStudent");
         }
-        
+
         [HttpGet]
         public IActionResult AddFaculty()
         {
@@ -217,11 +319,22 @@ namespace School_Management_System_ASP_CORE.Controllers
                         dob = model.DateOfBirth,
                         address = model.Address,
                         gender = model.Gender,
-                        image = imagePath // Map to Image property in Faculty entity
+                        image = imagePath
                     };
 
-                    // Directly add faculty to the database without migrations
+                    // Add faculty to database
                     _context.Faculty.Add(faculty);
+                    await _context.SaveChangesAsync();
+
+                    // Add entry to users table
+                    var user = new User
+                    {
+                        email = model.Email,
+                        password = "123456", // In real apps, hash this!
+                        role = "faculty"
+                    };
+
+                    _context.Users.Add(user);
                     await _context.SaveChangesAsync();
 
                     TempData["Success"] = "Faculty added successfully!";
@@ -238,6 +351,7 @@ namespace School_Management_System_ASP_CORE.Controllers
             // If validation fails, return the view with validation errors
             return View(model);
         }
+
 
         // GET: Faculty List
         public IActionResult ManageFaculty()
@@ -301,14 +415,26 @@ namespace School_Management_System_ASP_CORE.Controllers
         public IActionResult Delete_Faculty(int id)
         {
             var faculty = _context.Faculty.FirstOrDefault(f => f.fid == id);
+
             if (faculty != null)
             {
+                // Delete matching user from Users table
+                var user = _context.Users.FirstOrDefault(u => u.email == faculty.email);
+                if (user != null)
+                {
+                    _context.Users.Remove(user);
+                }
+
+                // Delete faculty from Faculty table
                 _context.Faculty.Remove(faculty);
                 _context.SaveChanges();
+
                 TempData["DeleteSuccess"] = "Faculty deleted successfully!";
             }
+
             return RedirectToAction("ManageFaculty");
         }
+
 
         public IActionResult ClassView()
         {
@@ -429,33 +555,40 @@ namespace School_Management_System_ASP_CORE.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddHoliday(HolidayModel holiday)
+        public async Task<IActionResult> AddHoliday(HolidayModel holiday)
         {
             if (!ModelState.IsValid)
             {
                 return View(holiday);
             }
 
-            holiday.Id = holidayList.Count + 1;
-            holiday.Month = holiday.Date.Month;
-            holidayList.Add(holiday);
+            // Map HolidayModel to Holiday entity (if needed)
+            var holidayEntity = new Holidays
+            {
+                Name = holiday.Name,
+                Date = holiday.Date,
+                Month = holiday.Date.Month,
+            };
 
+            // Save to database
+            _context.Holidays.Add(holidayEntity);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Holiday added successfully!";
             return RedirectToAction("ManageHolidays");
         }
-        private static List<HolidayModel> holidayList = new List<HolidayModel>
-        {
-            new HolidayModel { Id = 1, Name = "Makarsankranti", Date = new DateTime(2025, 1, 14), Month = 1 },
-            new HolidayModel { Id = 2, Name = "Republic Day", Date = new DateTime(2025, 1, 26), Month = 1 },
-            new HolidayModel { Id = 3, Name = "Independence Day", Date = new DateTime(2025, 8, 15), Month = 8 },
-            new HolidayModel { Id = 4, Name = "Christmas", Date = new DateTime(2025, 12, 25), Month = 12 }
-        };
 
         // ✅ Route for displaying the holidays page
         [HttpGet]
-        public IActionResult ManageHolidays()
+        public IActionResult ManageHolidays(int month = 0)  // Default to 0 if no month is provided
         {
-            ViewBag.Month = 1;
-            var holidays = holidayList.Where(h => h.Month == 1).ToList();
+            if (month == 0)
+            {
+                month = DateTime.Now.Month;  // Get current month if no month is passed
+            }
+
+            var holidays = _context.Holidays.Where(h => h.Month == month).ToList();
+            ViewBag.Month = month;  // Set the selected month dynamically
             return View(holidays);
         }
 
@@ -464,47 +597,366 @@ namespace School_Management_System_ASP_CORE.Controllers
         [Route("Holiday/GetHolidaysByMonth")]
         public JsonResult GetHolidaysByMonth(int month)
         {
-            var holidays = holidayList.Where(h => h.Month == month).ToList();
+            var holidays = _context.Holidays.Where(h => h.Month == month).ToList();
             return Json(holidays);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateHoliday(Holidays model)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingHoliday = await _context.Holidays.FindAsync(model.Id);
+                if (existingHoliday != null)
+                {
+                    existingHoliday.Name = model.Name;
+                    existingHoliday.Date = model.Date;
+
+                    _context.Holidays.Update(existingHoliday);
+                    await _context.SaveChangesAsync();
+
+                    TempData["Success"] = "Holiday updated successfully!";
+
+                    var month = model.Date.Month;
+                    return RedirectToAction("ManageHolidays", new { month });
+                }
+            }
+
+            TempData["Error"] = "Failed to update holiday!";
+            return RedirectToAction("ManageHolidays");
+        }
+
+        public IActionResult Delete_Holiday(int id)
+        {
+            var holiday = _context.Holidays.FirstOrDefault(h => h.Id == id);
+            if (holiday != null)
+            {
+                _context.Holidays.Remove(holiday);
+                _context.SaveChanges();
+                TempData["Success"] = "Holiday deleted successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Holiday not found!";
+            }
+
+            // Redirect to the same month view
+            var selectedMonth = holiday?.Date.Month ?? DateTime.Now.Month;
+            return RedirectToAction("ManageHolidays", new { month = selectedMonth });
+        }
+
+        
         public IActionResult Profile()
         {
-            ProfileModel model = new ProfileModel
+            string email = HttpContext.Session.GetString("email");
+            string role = HttpContext.Session.GetString("role");
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(role))
             {
-                ProfileID = 1,
-                FirstName = "Ethan",
-                LastName = "Leo",
-                Email = "abcd@gmail.com",
-                PhoneNumber = "8200606297",
-                EmergencyPhoneNumber = "9876543210", // Added emergency contact
-                DateOfBirth = DateTime.Parse("2007-10-18"),
-                Gender = "Male",
-                Address = "Mountain View, California",
-                Role = "Admin",
-                ImagePath = "/images/default-profile.png"
-            };
+                return RedirectToAction("Login");
+            }
+
+            ProfileModel model = null;
+
+            if (role == "student")
+            {
+                var student = _context.Students.FirstOrDefault(x => x.Email == email);
+                if (student != null)
+                {
+                    model = new ProfileModel
+                    {
+                        ProfileID = student.sid,
+                        FirstName = student.FirstName,
+                        LastName = student.LastName,
+                        Email = student.Email,
+                        PhoneNumber = student.PhoneNumber,
+                        EmergencyPhoneNumber = student.EmergencyPhoneNumber,
+                        DateOfBirth = student.DateOfBirth,
+                        Gender = student.Gender,
+                        Address = student.Address,
+                        Role = role,
+                        ImagePath = student.ImagePath ?? "/images/default-profile.png"
+                    };
+                }
+            }
+            else if (role == "faculty")
+            {
+                var faculty = _context.Faculty.FirstOrDefault(x => x.email == email);
+                if (faculty != null)
+                {
+                    model = new ProfileModel
+                    {
+                        ProfileID = faculty.fid,
+                        FirstName = faculty.firstname,
+                        LastName = faculty.lastname,
+                        Email = faculty.email,
+                        PhoneNumber = faculty.phonenumber,
+                        EmergencyPhoneNumber = faculty.ephonenumber,
+                        DateOfBirth = faculty.dob,
+                        Gender = faculty.gender,
+                        Address = faculty.address,
+                        Role = role,
+                        ImagePath = faculty.image ?? "/images/default-profile.png"
+                    };
+                }
+            }
+            else if (role == "admin")
+            {
+                var admin = _context.Admin.FirstOrDefault(x => x.email == email);
+                if (admin != null)
+                {
+                    model = new ProfileModel
+                    {
+                        ProfileID = admin.Id,
+                        FirstName = admin.firstname,
+                        LastName = admin.lastname,
+                        Email = admin.email,
+                        PhoneNumber = admin.phonenumber,
+                        EmergencyPhoneNumber = admin.ephonenumber,
+                        DateOfBirth = admin.dob,
+                        Gender = admin.gender,
+                        Address = admin.address,
+                        Role = role,
+                        ImagePath = admin.image ?? "/images/default-profile.png"
+                    };
+                }
+            }
+
+            if (model == null)
+            {
+                return NotFound("Profile not found.");
+            }
 
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult UpdateProfile(ProfileModel model, IFormFile ProfileImage)
+        {
+            string email = HttpContext.Session.GetString("email");
+            string role = HttpContext.Session.GetString("role");
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(role))
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("Profile", model);
+            }
+
+            string imagePath = null;
+
+            // Debug: Check if ProfileImage is being received
+            if (ProfileImage != null && ProfileImage.Length > 0)
+            {
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ProfileImage.FileName);
+
+                // Debug: Check if fileName is being generated correctly
+                Console.WriteLine($"Generated file name: {fileName}");
+
+                // Ensure we are saving the image in the correct folder
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+
+                // Debug: Check the path where image will be saved
+                Console.WriteLine($"Saving image to path: {path}");
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    ProfileImage.CopyTo(stream);
+                }
+
+                // Store the relative path in the database
+                imagePath = "/uploads/" + fileName;
+
+                // Update the session with the new image path
+                HttpContext.Session.SetString("image", imagePath);
+            }
+            else
+            {
+                // Debug: Check if no image was uploaded
+                Console.WriteLine("No new image uploaded, using previous image path from session.");
+
+                // If no new image is uploaded, fallback to the current image path in session
+                imagePath = HttpContext.Session.GetString("image");
+            }
+
+            // Update based on role
+            if (role == "student")
+            {
+                var student = _context.Students.FirstOrDefault(x => x.Email == email);
+                if (student != null)
+                {
+                    student.FirstName = model.FirstName;
+                    student.LastName = model.LastName;
+                    student.PhoneNumber = model.PhoneNumber;
+                    student.DateOfBirth = model.DateOfBirth.Value;
+                    student.Gender = model.Gender;
+                    student.Address = model.Address;
+                    if (!string.IsNullOrEmpty(imagePath))
+                    {
+                        student.ImagePath = imagePath;
+                        Console.WriteLine($"Updating student image path to: {imagePath}");
+                    }
+                    _context.SaveChanges();
+                }
+            }
+            else if (role == "faculty")
+            {
+                var faculty = _context.Faculty.FirstOrDefault(x => x.email == email);
+                if (faculty != null)
+                {
+                    faculty.firstname = model.FirstName;
+                    faculty.lastname = model.LastName;
+                    faculty.phonenumber = model.PhoneNumber;
+                    faculty.dob = model.DateOfBirth.Value;
+                    faculty.gender = model.Gender;
+                    faculty.address = model.Address;
+                    if (!string.IsNullOrEmpty(imagePath))
+                    {
+                        faculty.image = imagePath;
+                        Console.WriteLine($"Updating faculty image path to: {imagePath}");
+                    }
+                    _context.SaveChanges();
+                }
+            }
+            else if (role == "admin")
+            {
+                var admin = _context.Admin.FirstOrDefault(x => x.email == email);
+                if (admin != null)
+                {
+                    admin.firstname = model.FirstName;
+                    admin.lastname = model.LastName;
+                    admin.phonenumber = model.PhoneNumber;
+                    admin.dob = model.DateOfBirth.Value;
+                    admin.gender = model.Gender;
+                    admin.address = model.Address;
+                    if (!string.IsNullOrEmpty(imagePath))
+                    {
+                        admin.image = imagePath;
+                        Console.WriteLine($"Updating admin image path to: {imagePath}");
+                    }
+                    _context.SaveChanges();
+                }
+            }
+
+            TempData["Success"] = "Profile updated successfully!";
+            return RedirectToAction("Profile");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfilePicture(IFormFile ProfilePicture)
+        {
+            var email = HttpContext.Session.GetString("email");
+            var role = HttpContext.Session.GetString("role");
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(role))
+            {
+                return RedirectToAction("Login", "Auth"); // Or show unauthorized
+            }
+
+            string fileName = "";
+
+            if (ProfilePicture != null && ProfilePicture.Length > 0)
+            {
+                // Generate a unique file name
+                fileName = Guid.NewGuid().ToString() + Path.GetExtension(ProfilePicture.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+
+                // Save the file in the uploads directory
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ProfilePicture.CopyToAsync(stream);
+                }
+            }
+
+            // Update the profile picture in the database based on role
+            switch (role.ToLower())
+            {
+                case "student":
+                    var student = await _context.Students.FirstOrDefaultAsync(x => x.Email == email);
+                    if (student != null)
+                    {
+                        student.ImagePath = "/uploads/" + fileName; // Save the relative path
+                        _context.Students.Update(student);
+                    }
+                    break;
+
+                case "faculty":
+                    var faculty = await _context.Faculty.FirstOrDefaultAsync(x => x.email == email);
+                    if (faculty != null)
+                    {
+                        faculty.image = "/uploads/" + fileName; // Save the relative path
+                        _context.Faculty.Update(faculty);
+                    }
+                    break;
+
+                case "admin":
+                    var admin = await _context.Admin.FirstOrDefaultAsync(x => x.email == email);
+                    if (admin != null)
+                    {
+                        admin.image = "/uploads/" + fileName; // Save the relative path
+                        _context.Admin.Update(admin);
+                    }
+                    break;
+
+                default:
+                    TempData["Error"] = "Role not authorized to update profile picture.";
+                    return RedirectToAction("Profile");
+            }
+
+            await _context.SaveChangesAsync();
+            TempData["Profile_Success"] = "Profile picture updated!";
+            return RedirectToAction("Profile");
+        }
+
+
+
         [HttpGet]
         public IActionResult ChangePassword()
         {
-            return View(new ChangePasswordModel());
+            return View();        
         }
-
         [HttpPost]
         public IActionResult ChangePassword(ChangePasswordModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model); // Return form with validation errors
+                return View(model);
             }
 
-            // ✅ Simulating password change (TODO: Implement actual password update logic)
-            TempData["SuccessMessage"] = "Password changed successfully!";
+            // Get user from session
+            string email = HttpContext.Session.GetString("email");
 
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["SuccessMessage"] = "Session expired. Please log in again.";
+                return RedirectToAction("Login");
+            }
+
+            // Get user from database
+            var user = _context.Users.FirstOrDefault(u => u.email == email);
+
+            if (user == null)
+            {
+                TempData["SuccessMessage"] = "User not found.";
+                return RedirectToAction("Login");
+            }
+
+            // Check current password
+            if (user.password != model.CurrentPassword)
+            {
+                ModelState.AddModelError("CurrentPassword", "Current password is incorrect.");
+                return View(model);
+            }
+
+            // Update password
+            user.password = model.NewPassword;
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "Password changed successfully!";
             return RedirectToAction("ChangePassword");
         }
 

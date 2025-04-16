@@ -1,5 +1,33 @@
 ﻿@model List<School_Management_System_ASP_CORE.Models.StudentModel>
 
+@{
+    ViewData["Title"] = "Student Management";
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            toastr.options = {
+                "positionClass": "toast-top-center", // 💥 Centered at the top
+                "timeOut": "3000",                   // Optional: auto-dismiss after 3s
+                "closeButton": true,                 // Optional: show close (×) button
+                "progressBar": true                  // Optional: show progress bar
+            };
+
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    toastr.success("@TempData["Success"]");
+            </text>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <text>
+                    toastr.error("@TempData["Error"]");
+            </text>
+        }
+                });
+    </script>
+}
 <div class="p-6 bg-gray-100 rounded shadow-md">
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-bold">All Students List</h1>
@@ -180,3 +208,4 @@
         }
     });
 </script>
+
