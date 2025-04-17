@@ -1,7 +1,13 @@
 ﻿@model List<School_Management_System_ASP_CORE.Models.Holidays>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Holiday Management";
     int selectedMonth = ViewBag.Month;  // Get the selected month from ViewBag
+}
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    var role = session.GetString("role");
 }
 @section Scripts {
     <script>
@@ -61,7 +67,10 @@
                         <th class="p-2">Sr No.</th>
                         <th class="p-2">Holiday Name</th>
                         <th class="p-2">Date</th>
-                        <th class="p-2">Action</th>
+                        @if (role == "admin" || role == "faculty")
+                        {
+                            <th class="p-2">Action</th>
+                        }
                     </tr>
                 </thead>
                 <tbody id="holidayTable">
@@ -85,14 +94,17 @@
                             <td class="p-2">@id</td>
                             <td class="p-2">@holiday.Name</td>
                             <td class="p-2">@holiday.Date.ToString("dd-MM-yyyy")</td>
-                            <td class="p-2">
-                                <a href="javascript:void(0)"
-                                   onclick="openEditModalFromBase64('@encodedHoliday')"
-                                   class="text-blue-600 hover:text-blue-800 mx-1">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a asp-action="Delete_Holiday" asp-route-id="@holiday.Id" class="text-red-600 hover:text-red-800 mx-1"><i class="fas fa-trash-alt"></i></a>
-                            </td>
+                            @if (role == "admin" || role == "faculty")
+                            {
+                                <td class="p-2">
+                                    <a href="javascript:void(0)"
+                                    onclick="openEditModalFromBase64('@encodedHoliday')"
+                                    class="text-blue-600 hover:text-blue-800 mx-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete_Holiday" asp-route-id="@holiday.Id" class="text-red-600 hover:text-red-800 mx-1"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            }
                         </tr>
                         id++;
                     }

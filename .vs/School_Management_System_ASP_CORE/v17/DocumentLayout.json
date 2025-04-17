@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|e:\\laragon\\www\\asp.net\\school_management_system_asp_core\\school_management_system_asp_core\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5EE84D4-2AD6-4B9E-9CD5-C48188AC022B}|School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE.csproj|solutionrelative:school_management_system_asp_core\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,13 +30,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "School_Management_System_ASP_CORE\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAIQAAAAAAAAAAAAAAJUAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-16T13:53:20.83Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "AdminController.cs",
               "DocumentMoniker": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
               "ToolTip": "E:\\laragon\\www\\ASP.NET\\School_Management_System_ASP_CORE\\School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
               "RelativeToolTip": "School_Management_System_ASP_CORE\\Controllers\\AdminController.cs",
-              "ViewState": "AQIAANoBAAAAAAAAAAAIwOEBAAAnAAAA",
+              "ViewState": "AQIAAMQBAAAAAAAAAAAgwOEBAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-16T03:42:28.192Z",
               "EditorCaption": ""

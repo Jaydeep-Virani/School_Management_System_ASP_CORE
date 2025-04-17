@@ -16,6 +16,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Holidays> Holidays { get; set; }
 
     public DbSet<Admin> Admin { get; set; }
+
+    public DbSet<LeaveModel> Leave_Master { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ManageClassModel>().ToTable("master_class");
@@ -38,5 +40,8 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Admin>().ToTable("admin_master");
         modelBuilder.Entity<Admin>().HasKey(a => a.Id);
+
+        modelBuilder.Entity<LeaveModel>().ToTable("leave_master");
+        modelBuilder.Entity<LeaveModel>().HasKey(l => l.lid);
     }
 }

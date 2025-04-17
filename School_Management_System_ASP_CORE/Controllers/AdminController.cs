@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using static School_Management_System_ASP_CORE.Controllers.AdminController;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace School_Management_System_ASP_CORE.Controllers
 {
@@ -960,14 +961,6 @@ namespace School_Management_System_ASP_CORE.Controllers
             return RedirectToAction("ChangePassword");
         }
 
-
-        private static List<LeaveModel> leaveData = new List<LeaveModel>();
-
-        public ActionResult ManageLeave()
-        {
-            return View(leaveData);
-        }
-
         public ActionResult AddLeave()
         {
             return View();
@@ -981,22 +974,70 @@ namespace School_Management_System_ASP_CORE.Controllers
                 return View(model);
             }
 
-            model.Id = leaveData.Count + 1;
-            model.Status = false; // Default new leave requests to "Pending"
-            leaveData.Add(model);
+            var email = HttpContext.Session.GetString("email");
+            var role = HttpContext.Session.GetString("role");
 
-            TempData["SuccessMessage"] = "Leave application submitted successfully!";
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(role))
+            {
+                TempData["ErrorMessage"] = "Session expired. Please log in again.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            model.Email = email;
+            model.Role = role;
+            model.Status = 0; 
+
+            _context.Leave_Master.Add(model);
+            _context.SaveChanges();
+
+            TempData["Success"] = "Leave application submitted successfully!";
             return RedirectToAction("ManageLeave");
+        }
+        public ActionResult ManageLeave()
+        {
+            // Get the current user's role from the session
+            var role = HttpContext.Session.GetString("role");
+            var email = HttpContext.Session.GetString("email");
+
+            List<LeaveModel> leaveData;
+
+            if (role == "faculty")
+            {
+                // If role is faculty, filter to only show student's leave records
+                leaveData = _context.Leave_Master.Where(l => l.Role == "student" && l.Status == 0).ToList();
+            }
+            else if (role == "admin")
+            {
+                // If role is admin, show both student and faculty leave records
+                leaveData = _context.Leave_Master
+                                     .Where(l => (l.Role == "student" || l.Role == "faculty") && l.Status == 0)
+                                     .ToList();
+            }
+            else if (role == "student")
+            {
+                // If role is student, filter to only show their own leave records
+                leaveData = _context.Leave_Master
+                             .Where(l => l.Email == email && l.Status == 1)
+                             .ToList();
+            }
+            else
+            {
+                // For other roles, you can decide to show no data or return an error view
+                leaveData = new List<LeaveModel>(); // Show empty list or handle accordingly
+            }
+
+            return View(leaveData);
         }
 
         [HttpPost]
-        public JsonResult UpdateLeaveStatus(int id, bool status)
+        public IActionResult UpdateLeaveStatus(int id, bool status)
         {
-            var leave = leaveData.FirstOrDefault(l => l.Id == id);
+            var leave = _context.Leave_Master.FirstOrDefault(l => l.lid == id);
             if (leave != null)
             {
-                leave.Status = status;
-                return Json(new { success = true, updatedStatus = status });
+                leave.Status = status ? 1 : 0;  // Update status to 1 or 0 based on checkbox
+                _context.SaveChanges();
+                return Json(new { success = true });
             }
             return Json(new { success = false });
         }

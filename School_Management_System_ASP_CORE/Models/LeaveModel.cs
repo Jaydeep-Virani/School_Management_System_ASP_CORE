@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System_ASP_CORE.Models
 {
+    [Table("leave_master")]
     public class LeaveModel
     {
-        public int Id { get; set; }
+        [Key]
+        public int lid { get; set; }
 
         [Required(ErrorMessage = "Leave Reason is required.")]
         public string LeaveReason { get; set; }
@@ -16,7 +19,10 @@ namespace School_Management_System_ASP_CORE.Models
         [Required(ErrorMessage = "Leave Date is required.")]
         public DateTime LeaveDate { get; set; }
 
-        // ✅ Add this missing Status property
-        public bool Status { get; set; } = false;
+        public string Email { get; set; }
+
+        public string Role { get; set; }
+
+        public int Status { get; set; } = 0;
     }
 }

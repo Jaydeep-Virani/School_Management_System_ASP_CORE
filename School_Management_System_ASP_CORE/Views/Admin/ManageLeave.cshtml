@@ -1,7 +1,14 @@
-﻿@{
-    ViewData["Title"] = "ManageLeave";
+﻿@model IEnumerable<School_Management_System_ASP_CORE.Models.LeaveModel>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Manage Leave Requests";
 }
 
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    var role = session.GetString("role");
+}
 <div class="p-6 bg-gray-100 min-h-screen">
     <div class="mb-4 flex justify-between items-center">
         <h2 class="text-2xl font-semibold text-gray-800">All Leave Requests</h2>
@@ -21,21 +28,30 @@
             @foreach (var leave in Model)
             {
                 <tr>
-                    <td class="border px-4 py-2">@(Model.IndexOf(leave) + 1)</td>
-                    <td class="border px-4 py-2">@leave.LeaveReason</td>
-                    <td class="border px-4 py-2">@leave.LeaveDay</td>
-                    <td class="border px-4 py-2">@leave.LeaveDate.ToString("yyyy-MM-dd")</td>
-                    <td class="border px-4 py-2">
+                    <td class="border px-4 py-2 text-center">@(Model.ToList().IndexOf(leave) + 1)</td>
+                    <td class="border px-4 py-2 text-center">@leave.LeaveReason</td>
+                    <td class="border px-4 py-2 text-center">@leave.LeaveDay</td>
+                    <td class="border px-4 py-2 text-center">@leave.LeaveDate.ToString("yyyy-MM-dd")</td>
+                    @if (role == "admin" || role == "faculty")
+                    { 
+                    <td class="border px-4 py-2 text-center">
                         <label class="inline-flex items-center cursor-pointer">
-                            <input type="checkbox" class="sr-only peer" @(leave.Status ? "checked" : "") onchange="updateStatus(@leave.Id, this.checked)">
-                            <div class="relative w-11 h-6 rounded-full peer bg-gray-700 @(leave.Status ? "bg-green-600" : "bg-red-600")">
-                                <div class="absolute top-0.5 left-1 w-5 h-5 bg-white rounded-full transition-all transform @(leave.Status ? "translate-x-5" : "")"></div>
+                            <input type="checkbox" class="sr-only peer" @(leave.Status == 1 ? "checked" : "") onchange="updateStatus(@leave.lid, this.checked)">
+                            <div class="relative w-11 h-6 rounded-full peer bg-gray-700 @(leave.Status == 1 ? "bg-green-600" : "bg-red-600")">
+                                <div class="absolute top-0.5 left-1 w-5 h-5 bg-white rounded-full transition-all transform @(leave.Status == 1 ? "translate-x-5" : "")"></div>
                             </div>
-                            <span class="ml-2 text-sm font-medium @(leave.Status ? "text-green-600" : "text-red-600")">
-                                @(leave.Status ? "Approved" : "Pending")
+                            <span class="ml-2 text-sm font-medium @(leave.Status == 1 ? "text-green-600" : "text-red-600")">
+                                @(leave.Status == 1 ? "Approved" : "Pending")
                             </span>
                         </label>
                     </td>
+                    }
+                    @if (role == "student")
+                    {
+                        <td class="border px-4 py-2 text-center">
+                            <span class="text-green-600 font-medium">Approved</span>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>
@@ -53,6 +69,7 @@
             success: function (response) {
                 if (response.success) {
                     console.log("Status updated successfully!");
+                    location.reload();
                 } else {
                     alert("Failed to update status.");
                 }
